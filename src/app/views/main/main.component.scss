@@ -21,18 +21,31 @@
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
   // position: relative;
-  .content {
-    grid-area: 4/2 / span 8 / span 5;
-    display: flex;
-    flex-direction: column;
-    .title {
-      margin-top: auto;
-    }
-    .descr {
-      margin-bottom: 30px;
-    }
-    .controls {
-    }
+  // .content {
+  //   grid-area: 4/2 / span 8 / span 5;
+  //   display: flex;
+  //   flex-direction: column;
+  //   .title {
+  //     margin-top: auto;
+  //   }
+  //   .descr {
+  //     margin-bottom: 30px;
+  //   }
+  //   .controls {
+  //   }
+  // }
+}
+.content {
+  grid-area: 4/2 / span 8 / span 5;
+  display: flex;
+  flex-direction: column;
+  .title {
+    margin-top: auto;
+  }
+  .descr {
+    margin-bottom: 30px;
+  }
+  .controls {
   }
 }
 .btn {

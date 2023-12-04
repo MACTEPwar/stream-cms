@@ -1,4 +1,4 @@
-<div class="golden-grid">
+<div class="golden-grid"  style="overflow: hidden">
   <ng-container *ngIf="currentSlide$ | async as currentSlide">
     <ng-container *ngTemplateOutlet="currentSlide.template"></ng-container>
   </ng-container>
@@ -6,33 +6,38 @@
   <ng-template appTemplate="slide">
     <div class="bg-slide"></div>
     <div
+      [@slideAnimation]="currentSlideState"
+      (@slideAnimation.done)="onAnimationDone($event)"
       class="silder"
       style="
         background-image: url('../../../assets/BG_img2.png');
         grid-area: 1 / 1 / span 12 / span 13;
       "
+    ></div>
+    <div
+      class="golden-grid"
+      [@slideTranslate2]="currentSlideState"
+      style="overflow: hidden"
     >
-      <div class="golden-grid">
-        <div class="content" style="grid-area: 4/12 / span 8 / span 5">
-          <div class="title">
-            <span>заголовок</span>
-            <div class="border"></div>
-          </div>
-          <div class="descr">
-            <span
-              >Lorem ipsum dolor sit amet consectetur. Quam dictum scelerisque
-              nibh mauris gravida leo tincidunt. Proin pellentesque molestie
-              facilisis egestas neque. Eget a lectus aliquet tortor. Integer
-              nisl turpis amet facilisis sem. Et praesent nibh lobortis eleifend
-              consequat cras. Lobortis amet convallis curabitur proin lectus.
-              Consequat amet pellentesque sit purus et. At est ultrices augue
-              eu. Sagittis viverra orci enim vitae. Iaculis risus urna magnis
-              pulvinar amet accumsan est curabitur.</span
-            >
-          </div>
-          <div class="controls">
-            <div class="button"><span>кнопка</span></div>
-          </div>
+      <div class="content" style="grid-area: 4/12 / span 8 / span 5">
+        <div class="title">
+          <span>заголовок</span>
+          <div class="border"></div>
+        </div>
+        <div class="descr">
+          <span
+            >Lorem ipsum dolor sit amet consectetur. Quam dictum scelerisque
+            nibh mauris gravida leo tincidunt. Proin pellentesque molestie
+            facilisis egestas neque. Eget a lectus aliquet tortor. Integer nisl
+            turpis amet facilisis sem. Et praesent nibh lobortis eleifend
+            consequat cras. Lobortis amet convallis curabitur proin lectus.
+            Consequat amet pellentesque sit purus et. At est ultrices augue eu.
+            Sagittis viverra orci enim vitae. Iaculis risus urna magnis pulvinar
+            amet accumsan est curabitur.</span
+          >
+        </div>
+        <div class="controls">
+          <div class="button"><span>кнопка</span></div>
         </div>
       </div>
     </div>
@@ -41,33 +46,38 @@
   <ng-template appTemplate="slide">
     <div class="bg-slide"></div>
     <div
+      [@fromRightToLieft]="currentSlideState"
+      (@fromRightToLieft.done)="onAnimationDone($event)"
       class="silder"
       style="
         background-image: url('../../../assets/BG_img.png');
         grid-area: 1 / 6 / span 12 / span 13;
       "
+    ></div>
+    <div
+      class="golden-grid"
+      style="overflow: hidden"
+      [@slideTranslate1]="currentSlideState"
     >
-      <div class="golden-grid">
-        <div class="content" style="grid-area: 4/2 / span 8 / span 5">
-          <div class="title">
-            <span>заголовок</span>
-            <div class="border"></div>
-          </div>
-          <div class="descr">
-            <span
-              >Lorem ipsum dolor sit amet consectetur. Quam dictum scelerisque
-              nibh mauris gravida leo tincidunt. Proin pellentesque molestie
-              facilisis egestas neque. Eget a lectus aliquet tortor. Integer
-              nisl turpis amet facilisis sem. Et praesent nibh lobortis eleifend
-              consequat cras. Lobortis amet convallis curabitur proin lectus.
-              Consequat amet pellentesque sit purus et. At est ultrices augue
-              eu. Sagittis viverra orci enim vitae. Iaculis risus urna magnis
-              pulvinar amet accumsan est curabitur.</span
-            >
-          </div>
-          <div class="controls">
-            <div class="button"><span>кнопка</span></div>
-          </div>
+      <div class="content" style="grid-area: 4/2 / span 8 / span 5">
+        <div class="title">
+          <span>заголовок</span>
+          <div class="border"></div>
+        </div>
+        <div class="descr">
+          <span
+            >Lorem ipsum dolor sit amet consectetur. Quam dictum scelerisque
+            nibh mauris gravida leo tincidunt. Proin pellentesque molestie
+            facilisis egestas neque. Eget a lectus aliquet tortor. Integer nisl
+            turpis amet facilisis sem. Et praesent nibh lobortis eleifend
+            consequat cras. Lobortis amet convallis curabitur proin lectus.
+            Consequat amet pellentesque sit purus et. At est ultrices augue eu.
+            Sagittis viverra orci enim vitae. Iaculis risus urna magnis pulvinar
+            amet accumsan est curabitur.</span
+          >
+        </div>
+        <div class="controls">
+          <div class="button"><span>кнопка</span></div>
         </div>
       </div>
     </div>
