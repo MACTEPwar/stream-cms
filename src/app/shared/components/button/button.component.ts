@@ -55,7 +55,8 @@ export class ButtonComponent implements OnInit {
     this.widthBorder = this.width;
     this.heightBorder = this.height - 4 * 2;
     const o = this.widthBorder - xOffsetAngles * 2;
-    const w = o + xOffsetAngles;
+    // -2 - доабвит offset
+    const w = o + xOffsetAngles - 2;
     const ctrX1 = w + 2.453;
     const ctrX2 = w + 4.806;
     const ctrX3 = w + 6.541;
