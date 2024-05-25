@@ -20,6 +20,27 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Lemon";
+  src: url("/assets/fonts/Lemon-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/Montserrat/Montserrat.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/Montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 :root {
   --font-family: "Nunito Sans", sans-serif;
 }
