@@ -22,6 +22,7 @@ nav {
   .navs {
     display: flex;
     .nav-item {
+      position: relative;
       opacity: 0.8;
       margin-right: 49px;
       margin-top: auto;
@@ -36,7 +37,31 @@ nav {
         cursor: pointer;
       }
       &.active {
+        img {
+          opacity: 1;
+        }
         opacity: 1;
+      }
+
+      img {
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        bottom: -11px;
+      }
+
+      /* For Firefox */
+      @-moz-document url-prefix() {
+        img {
+          width: -moz-available; /* Firefox-specific property */
+        }
+      }
+
+      /* For Chrome */
+      @supports (-webkit-appearance: none) {
+        img {
+          width: -webkit-fill-available; /* Chrome-specific property */
+        }
       }
     }
   }
