@@ -50,16 +50,17 @@
 }
 .btn {
   background: transparent;
+  cursor: pointer;
   &-left {
     grid-area: 4 / 1 / span 8 / span 1;
     z-index: 1;
     display: flex;
     font-size: 30px;
     font-weight: bold;
-    &::before {
-      margin: auto;
-      content: "<";
-    }
+    background-image: url(../../../assets/left_arrow.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
   }
   &-right {
     grid-area: 4 / 18 / span 8 / span 1;
@@ -67,10 +68,10 @@
     display: flex;
     font-size: 30px;
     font-weight: bold;
-    &::before {
-      margin: auto;
-      content: ">";
-    }
+    background-image: url(../../../assets/right_arrow.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
   }
 }
 .slide-loader-container {

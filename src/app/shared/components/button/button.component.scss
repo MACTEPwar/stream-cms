@@ -1,23 +1,23 @@
-// .container {
-//   display: flex;
-//   .content {
-//     padding: 11px 36px;
-//     background: url("../../../../assets/btn-bg.png");
-//     background-size: auto 100%;
-//   }
-//   .left {
-//     width: 27 px;
-//     background: url("../../../../assets/btn-bg-angle-l.png");
-//     background-size: auto 100%;
-//   }
-//   .right {
-//     width: 27px;
-//     background: url("../../../../assets/btn-bg-angle.png");
-//     background-size: auto 100%;
-//   }
-// }
 :host {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+}
+
+.content-container {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .content {
+    margin: 13px auto;
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(to bottom, #77531c, #653908);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

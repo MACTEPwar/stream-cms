@@ -1,4 +1,4 @@
-<div class="golden-grid"  style="overflow: hidden">
+<div class="golden-grid" style="overflow: hidden">
   <ng-container *ngIf="currentSlide$ | async as currentSlide">
     <ng-container *ngTemplateOutlet="currentSlide.template"></ng-container>
   </ng-container>
@@ -36,9 +36,15 @@
             amet accumsan est curabitur.</span
           >
         </div>
-        <div class="controls">
+        <div
+          class="controls"
+          style="height: 48px; width: 250px; margin-left: auto"
+        >
           <!-- <div class="button"><span>кнопка</span></div> -->
-          <app-button></app-button>
+          <app-button>
+            <span>Тест</span>
+          </app-button>
+          <!-- <app-s-button></app-s-button> -->
         </div>
       </div>
     </div>
@@ -77,8 +83,10 @@
             amet accumsan est curabitur.</span
           >
         </div>
-        <div class="controls">
-          <div class="button"><span>кнопка</span></div>
+        <div class="controls" style="width: 250px; margin-right: auto">
+          <!-- <div class="button"><span>кнопка</span></div> -->
+          <!-- <app-s-button></app-s-button> -->
+          <app-button><span>Slide 2</span></app-button>
         </div>
       </div>
     </div>
