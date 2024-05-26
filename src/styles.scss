@@ -1,45 +1,7 @@
+@import "./styles/fonts";
+@import "./styles/mixins";
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-  font-family: "Nunito Sans";
-  src: url("/assets/fonts/NunitoSans_10pt-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
 
-@font-face {
-  font-family: "Nunito Sans";
-  src: url("/assets/fonts/NunitoSans_10pt-Medium.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Nunito Sans";
-  src: url("/assets/fonts/NunitoSans_10pt-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Lemon";
-  src: url("/assets/fonts/Lemon-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/assets/Montserrat/Montserrat.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/assets/Montserrat/Montserrat-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
 
 :root {
   --font-family: "Nunito Sans", sans-serif;
@@ -61,20 +23,20 @@ body {
 //   grid-template-columns: 1fr 1fr 2fr 4fr 2.66fr 5.33fr 5.33fr 4.33fr 2.83fr 3.5fr 3.5fr 2.83fr 4.33fr 5.33fr 5.33fr 2.66fr 4fr 2fr 1fr 1fr;
 // }
 
-.title {
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
+// .title {
+//   font-size: 30px;
+//   display: flex;
+//   flex-direction: column;
 
-  span {
-    margin-bottom: 30px;
-  }
-  .border {
-    width: 60px;
-    border-bottom: 1px solid black;
-    margin-bottom: 30px;
-  }
-}
+//   span {
+//     margin-bottom: 30px;
+//   }
+//   .border {
+//     width: 60px;
+//     border-bottom: 1px solid black;
+//     margin-bottom: 30px;
+//   }
+// }
 
 .button {
   color: black;

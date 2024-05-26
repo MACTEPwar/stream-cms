@@ -1,0 +1,17 @@
+@import "/src/styles/mixins";
+// :host {
+//     position: relative;
+// }
+.container {
+  position: relative;
+  .content {
+    @include H1;
+    margin-bottom: 30px;
+  }
+  .border {
+    position: absolute;
+    height: 12px;
+    left: 0;
+    bottom: -8px;
+  }
+}
