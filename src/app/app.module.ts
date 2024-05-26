@@ -8,6 +8,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SButtonModule } from './shared/components/s-button/s-button.module';
+import { RequestsModule } from '@core';
+import { SheduleService } from '@app-services';
 
 @NgModule({
   declarations: [AppComponent, MainComponent, NotFoundComponent],
@@ -17,8 +19,9 @@ import { SButtonModule } from './shared/components/s-button/s-button.module';
     SharedModule,
     BrowserAnimationsModule,
     SButtonModule,
+    RequestsModule,
   ],
-  providers: [],
+  providers: [SheduleService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

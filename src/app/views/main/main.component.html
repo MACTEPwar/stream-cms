@@ -19,34 +19,26 @@
       [@slideTranslate2]="currentSlideState"
       style="overflow: hidden"
     >
-      <div class="content" style="grid-area: 4/12 / span 8 / span 5">
-        <div class="title">
-          <!-- <span>заголовок</span>
-          <div class="border"></div> -->
+      <div class="content" style="grid-area: 4/12 / span 7 / span 7">
+        <div class="title right">
           <app-title [width]="214"><span>Расписание</span></app-title>
         </div>
+        <!-- <div class="golden-grid">
+          <div style="grid-area: 4/12 / span 7 / span 7">
+            <app-title [width]="214"><span>Расписание</span></app-title>
+          </div>
+        </div> -->
         <div class="descr">
-          <span
-            >Lorem ipsum dolor sit amet consectetur. Quam dictum scelerisque
-            nibh mauris gravida leo tincidunt. Proin pellentesque molestie
-            facilisis egestas neque. Eget a lectus aliquet tortor. Integer nisl
-            turpis amet facilisis sem. Et praesent nibh lobortis eleifend
-            consequat cras. Lobortis amet convallis curabitur proin lectus.
-            Consequat amet pellentesque sit purus et. At est ultrices augue eu.
-            Sagittis viverra orci enim vitae. Iaculis risus urna magnis pulvinar
-            amet accumsan est curabitur.</span
-          >
+          <app-list [items]="(shedule$ | async) ?? []"></app-list>
         </div>
-        <div
+        <!-- <div
           class="controls"
           style="height: 48px; width: 250px; margin-left: auto"
         >
-          <!-- <div class="button"><span>кнопка</span></div> -->
           <app-button>
             <span>Тест</span>
           </app-button>
-          <!-- <app-s-button></app-s-button> -->
-        </div>
+        </div> -->
       </div>
     </div>
   </ng-template>

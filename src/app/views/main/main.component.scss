@@ -41,9 +41,14 @@
   flex-direction: column;
   .title {
     margin-top: auto;
+    &.right {
+      margin-left: auto;
+      margin-right: 60px;
+    }
   }
   .descr {
-    margin-bottom: 30px;
+    margin-bottom: 0;
+    display: flex;
   }
   .controls {
   }

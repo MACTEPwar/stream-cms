@@ -8,17 +8,16 @@ import {
 import {
   ChangeDetectorRef,
   Component,
-  ContentChildren,
   OnInit,
   QueryList,
-  TemplateRef,
-  ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { SheduleService } from '@app-services';
+import { Observable } from 'rxjs';
 import { SliderService } from 'src/app/core/app-services/slider.service';
 import { Slide } from 'src/app/models/slide';
 import { Nullable } from 'src/app/models/t-nullable';
+import { ListItem } from 'src/app/shared/components/list/list-item';
 import { AppTemplateDirective } from 'src/app/shared/directives/template.directive';
 
 @Component({
@@ -62,10 +61,17 @@ export class MainComponent implements OnInit {
 
   currentSlideState = 'in';
 
+  shedule$: Observable<Array<ListItem>>;
+
   constructor(
     private sliderService: SliderService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private sheduleService: SheduleService
+  ) {
+    this.shedule$ = this.sheduleService.getSheduleForListComponent$();
+
+    this.sheduleService.loadShedule();
+  }
 
   ngOnInit(): void {
     this.currentSlide$ = this.sliderService.currentSlide$;

@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  .startContent {
+    position: absolute;
+    right: 8px;
+    top: 16px;
+    width: 84px;
+    height: 24px;
+    span {
+      justify-content: center;
+      display: flex;
+    }
+  }
+  .endContent {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 84px;
+    height: 24px;
+    span {
+      justify-content: center;
+      display: flex;
+    }
+  }
+  .content {
+    position: absolute;
+    top: 16px;
+    left: 165px;
+    width: 320px;
+    height: 24px;
+    span {
+      justify-content: center;
+      display: flex;
+    }
+  }
+}
