@@ -1,9 +1,10 @@
 import { Nullable } from 'src/app/models/t-nullable';
 
 export class ListItem {
-  startLabel: Nullable<ListItemContent> = null;
-  endLabel: Nullable<ListItemContent> = null;
+  rightLabel: Nullable<ListItemContent> = null;
+  leftLabel: Nullable<ListItemContent> = null;
   content: Nullable<ListItemContent> = null;
+  diraction: 'left' | 'right' | 'two-way' | 'none' = 'left';
 }
 
 export class ListItemContent {

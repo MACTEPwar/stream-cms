@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ListItem } from '../list-item';
 
 @Component({
@@ -9,8 +9,25 @@ import { ListItem } from '../list-item';
 export class ListItemComponent implements OnInit {
   @Input() item!: ListItem;
   @Input() flag = false;
+  @Input() width!: number;
 
-  constructor() {}
+  l1ForLeftArrowStatic = 27 - 5;
+  l1ForLeftArrowOffset = 0;
+  l1ForRightArrowStatic = 27 - 5;
+  l1ForRightArrowOffset = 0;
 
-  ngOnInit(): void {}
+  constructor(private el: ElementRef) {}
+
+  ngOnInit(): void {
+    this.recalcWidth();
+
+    console.log(this.item);
+  }
+
+  recalcWidth(): void {
+    this.l1ForLeftArrowOffset =
+      this.item.leftLabel?.width! - this.l1ForLeftArrowStatic;
+    this.l1ForRightArrowOffset =
+      this.item.rightLabel?.width! - this.l1ForRightArrowStatic;
+  }
 }

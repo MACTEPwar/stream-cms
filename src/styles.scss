@@ -2,7 +2,6 @@
 @import "./styles/mixins";
 /* You can add global styles to this file, and also import other style files */
 
-
 :root {
   --font-family: "Nunito Sans", sans-serif;
 }
@@ -56,4 +55,8 @@ body {
     text-transform: uppercase;
     margin: auto;
   }
+}
+
+.d-none {
+  display: none;
 }

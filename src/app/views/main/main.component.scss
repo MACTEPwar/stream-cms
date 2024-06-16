@@ -57,7 +57,7 @@
   background: transparent;
   cursor: pointer;
   &-left {
-    grid-area: 4 / 1 / span 8 / span 1;
+    grid-area: 1 / 1 / span 12 / span 1;
     z-index: 1;
     display: flex;
     font-size: 30px;
@@ -68,7 +68,7 @@
     background-size: auto;
   }
   &-right {
-    grid-area: 4 / 18 / span 8 / span 1;
+    grid-area: 1 / 18 / span 12 / span 1;
     z-index: 1;
     display: flex;
     font-size: 30px;

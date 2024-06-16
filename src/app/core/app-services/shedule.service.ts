@@ -21,22 +21,26 @@ export class SheduleService {
   getSheduleForListComponent$(): Observable<Array<ListItem>> {
     return this.shedule$.pipe(
       map((m) => {
-        return m.map((mm) => ({
-          startLabel: {
-            content: mm.time ?? '--:--',
-            width: 84,
-            color: 'white',
-          },
-          endLabel: {
+        return m.map((mm, i) => ({
+          leftLabel: {
             content: mm.dayOfWeek ?? '',
-            width: null,
+            width: 150,
             color: 'white',
           },
+          // leftLabel: null,
+          rightLabel: {
+            content: mm.time ?? '--:--',
+            width: 163,
+            color: 'white',
+          },
+          // rightLabel: null,
           content: {
             content: mm.content ?? '',
-            width: 84,
+            width: null,
             color: mm.content === 'Оффлайн' ? 'red' : 'white',
           },
+          // diraction: i % 2 === 0 ? 'left' : 'right',
+          diraction: 'left',
         }));
       })
     );

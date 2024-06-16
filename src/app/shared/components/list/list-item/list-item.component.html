@@ -1,185 +1,260 @@
-<div class="container">
-  <div class="startContent">
-    <span [ngStyle]="{ color: item.startLabel?.color }">{{
-      item.startLabel?.content
-    }}</span>
+<div
+  class="container"
+  [class]="'dir_' + (item.diraction === 'left' ? 'left' : 'right')"
+>
+  <div
+    [ngStyle]="{
+      color: item.leftLabel?.color,
+      width: item.leftLabel?.width! - 60 + 'px'
+    }"
+    class="leftContent"
+  >
+    <span>{{ item.leftLabel?.content }}</span>
   </div>
-  <div [ngStyle]="{ color: item.endLabel?.color }" class="endContent">
-    <span>{{ item.endLabel?.content }}</span>
-  </div>
-  <div [ngStyle]="{ color: item.content?.color }" class="content">
+  <div
+    [ngStyle]="{
+      color: item.content?.color,
+      left:
+        item.diraction === 'left' ? item.leftLabel?.width! + 15 + 'px' : '-1',
+      right:
+        item.diraction === 'right' ? item.leftLabel?.width! + 15 + 'px' : '-1',
+      width:
+        width -
+        (item.leftLabel?.width ?? 0) -
+        (item.rightLabel?.width ?? 0) -
+        7 +
+        'px'
+    }"
+    class="content"
+  >
     <span>{{ item.content?.content }}</span>
+  </div>
+  <div
+    *ngIf="item.rightLabel"
+    class="rightContent"
+    [ngStyle]="{
+      width: item.rightLabel?.width! - 50 + 'px'
+    }"
+  >
+    <span [ngStyle]="{ color: item.rightLabel?.color }">{{
+      item.rightLabel?.content
+    }}</span>
   </div>
 
   <svg
-    width="644"
-    height="58"
-    viewBox="0 0 644 58"
+    [attr.width]="width"
+    height="52"
+    [attr.viewBox]="'0 0 ' + width + ' 52'"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    [attr.transform]="item.diraction === 'left' ? '' : 'scale(-1,1)'"
   >
-    <!-- filter="url(#filter0_d_370_1431)" -->
-    <g>
-      <!-- Фон -->
-      <path
-        d="M644 3H27.0001C23.8525 3 20.8886 4.48194 19.0001 7L6.25006 24C4.91675 25.7778 4.91675 28.2222 6.25006 30L19.0001 47C20.8886 49.5181 23.8525 51 27.0001 51H644V3Z"
-        fill="url(#paint0_linear_370_1431)"
-      />
-      <!-- Правый вертикальный узор -->
-      <g opacity="0.35" filter="url(#filter1_d_370_1431)">
-        <mask
-          id="mask0_370_1431"
-          style="mask-type: alpha"
-          maskUnits="userSpaceOnUse"
-          x="506"
-          y="4"
+    <!-- transform="scale(-1,1) translate(600px)" -->
+    <!-- Общий бэкгроунд -->
+    <path
+      [attr.d]="
+        'm ' +
+        (width - 0.5) +
+        ' 1.5 h ' +
+        (width - 23.5) * -1 +
+        ' c -2.9902 0 -5.8058 1.4078 -7.6 3.8 l -12.75 17 c -1.2 1.6 -1.2 3.8 0 5.4 l 12.75 17 c 1.7942 2.3922 4.6098 3.8 7.6 3.8 h ' +
+        (width - 23.5) +
+        ' v -47 z'
+      "
+      fill="url(#paint0_linear_813_2370)"
+    />
+
+    <!-- Правая вертикалка -->
+    <!-- x="477" -->
+    <g *ngIf="item.rightLabel" opacity="0.35" filter="url(#filter0_d_813_2370)">
+      <mask
+        id="mask0_813_2370"
+        style="mask-type: alpha"
+        maskUnits="userSpaceOnUse"
+        [attr.x]="width - item.rightLabel.width!"
+        y="2"
+        width="38"
+        height="46"
+      >
+        <!-- matrix(-1 0 0 1 515 2) -->
+        <rect
           width="38"
           height="46"
-        >
-          <rect
-            width="38"
-            height="46"
-            transform="matrix(-1 0 0 1 544 4)"
-            fill="#D9D9D9"
-          />
-        </mask>
-        <g mask="url(#mask0_370_1431)">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M556 2C556 2.33498 555.993 2.66836 555.98 3H556.98C556.993 2.66829 557 2.33491 557 2C557 -11.8071 545.807 -23 532 -23C518.193 -23 507 -11.8071 507 2C507 6.55359 508.217 10.8228 510.345 14.5C508.217 18.1772 507 22.4464 507 27C507 31.3487 508.11 35.438 510.063 39C508.11 42.562 507 46.6513 507 51C507 64.8071 518.193 76 532 76C545.807 76 557 64.8071 557 51H556C556 64.2548 545.255 75 532 75C518.745 75 508 64.2548 508 51C508 47.0432 508.958 43.31 510.654 40.0195C515.045 47.2046 522.963 52 532 52C534.438 52 536.795 51.6509 539.023 51H532C523.117 51 515.36 46.1736 511.211 39C515.36 31.8264 523.117 27 532 27H536C536.944 27.2439 537.366 27.611 538 28.5L544 26.5L538 24.5C537.352 25.257 536.937 25.6173 536 26H532C523.325 26 515.724 21.397 511.508 14.5C515.724 7.60302 523.325 3 532 3H539.023C536.795 2.34908 534.438 2 532 2C523.157 2 515.386 6.59179 510.941 13.5212C509.066 10.1014 508 6.17523 508 2C508 -11.2548 518.745 -22 532 -22C545.255 -22 556 -11.2548 556 2ZM510.941 15.4788C509.066 18.8986 508 22.8248 508 27C508 30.9568 508.958 34.69 510.654 37.9804C514.213 32.1566 520.089 27.9028 527 26.5C520.272 25.1344 514.525 21.0666 510.941 15.4788Z"
-            fill="url(#paint1_linear_370_1431)"
-          />
-        </g>
-      </g>
-      <!-- Левый вертикальный узор -->
-      <g opacity="0.35" filter="url(#filter2_d_370_1431)">
-        <mask
-          id="mask1_370_1431"
-          style="mask-type: alpha"
-          maskUnits="userSpaceOnUse"
-          x="116"
-          y="4"
-          width="38"
-          height="46"
-        >
-          <rect x="116" y="4" width="38" height="46" fill="#D9D9D9" />
-        </mask>
-        <g mask="url(#mask1_370_1431)">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M104 2C104 2.33498 104.007 2.66836 104.02 3H103.02C103.007 2.66829 103 2.33491 103 2C103 -11.8071 114.193 -23 128 -23C141.807 -23 153 -11.8071 153 2C153 6.55359 151.783 10.8228 149.655 14.5C151.783 18.1772 153 22.4464 153 27C153 31.3487 151.89 35.438 149.937 39C151.89 42.562 153 46.6513 153 51C153 64.8071 141.807 76 128 76C114.193 76 103 64.8071 103 51H104C104 64.2548 114.745 75 128 75C141.255 75 152 64.2548 152 51C152 47.0432 151.042 43.31 149.346 40.0195C144.955 47.2046 137.037 52 128 52C125.562 52 123.205 51.6509 120.977 51H128C136.883 51 144.64 46.1736 148.789 39C144.64 31.8264 136.883 27 128 27H124C123.056 27.2439 122.634 27.611 122 28.5L116 26.5L122 24.5C122.648 25.257 123.063 25.6173 124 26H128C136.675 26 144.276 21.397 148.492 14.5C144.276 7.60302 136.675 3 128 3H120.977C123.205 2.34908 125.562 2 128 2C136.843 2 144.614 6.59179 149.059 13.5212C150.934 10.1014 152 6.17523 152 2C152 -11.2548 141.255 -22 128 -22C114.745 -22 104 -11.2548 104 2ZM149.059 15.4788C150.934 18.8986 152 22.8248 152 27C152 30.9568 151.042 34.69 149.346 37.9804C145.787 32.1566 139.911 27.9028 133 26.5C139.728 25.1344 145.475 21.0666 149.059 15.4788Z"
-            fill="url(#paint2_linear_370_1431)"
-          />
-        </g>
-      </g>
-      <!-- Фон под день недели -->
-      <path
-        d="M15.2616 12H105V42H15.25L6.25116 30.0015C4.91728 28.223 4.91788 25.7774 6.25265 23.9996L15.2616 12Z"
-        fill="url(#paint3_radial_370_1431)"
-      />
-      <!-- Обводка общая -->
-      <g filter="url(#filter3_d_370_1431)">
-        <path
-          d="M643.5 3.5H27C24.0098 3.5 21.1942 4.90784 19.4 7.3L6.65002 24.3C5.45001 25.9 5.45001 28.1 6.65002 29.7L19.4 46.7C21.1942 49.0922 24.0098 50.5 27 50.5H643.5V3.5Z"
-          stroke="url(#paint4_linear_370_1431)"
+          [attr.transform]="
+            'matrix(-1 0 0 1 ' + (width - item.rightLabel.width! + 38) + ' 2)'
+          "
+          fill="#D9D9D9"
         />
-      </g>
-      <!-- Фон под время -->
-      <path d="M543 12H644V42H543V12Z" fill="url(#paint5_radial_370_1431)" />
-      <rect
-        opacity="0.7"
-        x="170"
-        y="12"
-        width="320"
-        height="30"
-        fill="url(#paint6_radial_370_1431)"
-      />
-      <!-- Обводка под время -->
-      <g opacity="0.35" filter="url(#filter4_d_370_1431)">
+      </mask>
+      <g mask="url(#mask0_813_2370)">
+        <!-- 527 -->
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M553 12.5L644 12.5001V13.5001L553 13.5C547.753 13.5 543.5 9.2467 543.5 4H544.5C544.5 8.69442 548.306 12.5 553 12.5ZM553 41.5001L644 41.5V40.5L553 40.5001C547.753 40.5001 543.5 44.7534 543.5 50.0001H544.5C544.5 45.3057 548.306 41.5001 553 41.5001Z"
-          fill="url(#paint7_linear_370_1431)"
-          shape-rendering="crispEdges"
+          [attr.d]="
+            'm ' +
+            (width - item.rightLabel.width! + 50) +
+            ' 0 c 0 0.335 -0.007 0.6684 -0.02 1 h 1 c 0.013 -0.3317 0.02 -0.6651 0.02 -1 c 0 -13.8071 -11.193 -25 -25 -25 c -13.807 0 -25 11.1929 -25 25 c 0 4.5536 1.217 8.8228 3.345 12.5 c -2.128 3.6772 -3.345 7.9464 -3.345 12.5 c 0 4.3487 1.11 8.438 3.063 12 c -1.953 3.562 -3.063 7.6513 -3.063 12 c 0 13.8071 11.193 25 25 25 c 13.807 0 25 -11.1929 25 -25 h -1 c 0 13.2548 -10.745 24 -24 24 c -13.255 0 -24 -10.7452 -24 -24 c 0 -3.9568 0.958 -7.69 2.654 -10.9805 c 4.391 7.1851 12.309 11.9805 21.346 11.9805 c 2.438 0 4.795 -0.3491 7.023 -1 h -7.023 c -8.883 0 -16.64 -4.8264 -20.789 -12 c 4.149 -7.1736 11.906 -12 20.789 -12 h 4 c 0.944 0.2439 1.366 0.611 2 1.5 l 6 -2 l -6 -2 c -0.648 0.757 -1.063 1.1173 -2 1.5 h -4 c -8.675 0 -16.276 -4.603 -20.492 -11.5 c 4.216 -6.897 11.817 -11.5 20.492 -11.5 h 7.023 c -2.228 -0.6509 -4.585 -1 -7.023 -1 c -8.843 0 -16.614 4.5918 -21.059 11.5212 c -1.875 -3.4198 -2.941 -7.346 -2.941 -11.5212 c 0 -13.2548 10.745 -24 24 -24 c 13.255 0 24 10.7452 24 24 z m -45.059 13.4788 c -1.875 3.4198 -2.941 7.346 -2.941 11.5212 c 0 3.9568 0.958 7.69 2.654 10.9804 c 3.559 -5.8238 9.435 -10.0776 16.346 -11.4804 c -6.728 -1.3656 -12.475 -5.4334 -16.059 -11.0212 z'
+          "
+          fill="url(#paint1_linear_813_2370)"
         />
       </g>
-      <!-- Обводка под день недели -->
-      <g opacity="0.35" filter="url(#filter5_d_370_1431)">
+    </g>
+    <!-- Левая вертикалка -->
+    <!-- x="112" -->
+    <g *ngIf="item.leftLabel" opacity="0.5" filter="url(#filter1_d_813_2370)">
+      <mask
+        id="mask1_813_2370"
+        style="mask-type: alpha"
+        maskUnits="userSpaceOnUse"
+        [attr.x]="item.leftLabel.width! - 38"
+        y="2"
+        width="38"
+        height="46"
+      >
+        <rect
+          [attr.x]="item.leftLabel.width! - 38"
+          y="2"
+          width="38"
+          height="46"
+          fill="#D9D9D9"
+        />
+      </mask>
+      <g mask="url(#mask1_813_2370)">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M106 12.5L15 12.5001V13.5001L106 13.5C111.247 13.5 115.5 9.2467 115.5 4H114.5C114.5 8.69442 110.694 12.5 106 12.5ZM106 41.5001L15 41.5V40.5L106 40.5001C111.247 40.5001 115.5 44.7534 115.5 50.0001H114.5C114.5 45.3057 110.694 41.5001 106 41.5001Z"
-          fill="url(#paint8_linear_370_1431)"
-          shape-rendering="crispEdges"
+          [attr.d]="
+            'm ' +
+            (item.leftLabel.width! - 50) +
+            ' 0 c 0 0.335 0.007 0.6684 0.02 1 h -1.0004 c -0.013 -0.3317 -0.0196 -0.6651 -0.0196 -1 c 0 -13.8071 11.193 -25 25 -25 c 13.807 0 25 11.1929 25 25 c 0 4.5536 -1.217 8.8228 -3.345 12.5 c 2.128 3.6772 3.345 7.9464 3.345 12.5 c 0 4.3487 -1.11 8.438 -3.063 12 c 1.953 3.562 3.063 7.6513 3.063 12 c 0 13.8071 -11.193 25 -25 25 c -13.807 0 -25 -11.1929 -25 -25 h 1 c 0 13.2548 10.745 24 24 24 c 13.255 0 24 -10.7452 24 -24 c 0 -3.9568 -0.958 -7.69 -2.654 -10.9805 c -4.391 7.1851 -12.309 11.9805 -21.346 11.9805 c -2.438 0 -4.795 -0.3491 -7.023 -1 h 7.023 c 8.883 0 16.64 -4.8264 20.789 -12 c -4.149 -7.1736 -11.906 -12 -20.789 -12 h -4 c -0.944 0.2439 -1.366 0.611 -2 1.5 l -6 -2 l 6 -2 c 0.648 0.757 1.063 1.1173 2 1.5 h 4 c 8.675 0 16.276 -4.603 20.492 -11.5 c -4.216 -6.897 -11.817 -11.5 -20.492 -11.5 h -7.023 c 2.228 -0.6509 4.585 -1 7.023 -1 c 8.843 0 16.614 4.5918 21.059 11.5212 c 1.875 -3.4198 2.941 -7.346 2.941 -11.5212 c 0 -13.2548 -10.745 -24 -24 -24 c -13.255 0 -24 10.7452 -24 24 z m 45.059 13.4788 c 1.875 3.4198 2.941 7.346 2.941 11.5212 c 0 3.9568 -0.958 7.69 -2.654 10.9804 c -3.559 -5.8238 -9.435 -10.0776 -16.346 -11.4804 c 6.728 -1.3656 12.475 -5.4334 16.059 -11.0212 z'
+          "
+          fill="url(#paint2_linear_813_2370)"
         />
       </g>
-      <!-- Обводка под надпись центральную -->
+    </g>
+    <!-- Левый бэкгроунд для надписи -->
+    <path
+      *ngIf="item.leftLabel"
+      [attr.d]="
+        'm 11.2616 10 h ' +
+        (item.leftLabel?.width! - 60.2616) +
+        ' v 30 h ' +
+        (item.leftLabel?.width! - 60.25) * -1 +
+        ' l -8.9988 -11.9985 c -1.3339 -1.7785 -1.3333 -4.2241 0.0015 -6.0019 l 9.0089 -11.9996 z'
+      "
+      fill="url(#paint3_radial_813_2370)"
+    />
+    <!-- Общая обводка -->
+    <path
+      [attr.d]="
+        'm ' +
+        (width - 0.5) +
+        ' 1.5 h ' +
+        (width - 23) * -1 +
+        ' c -2.9902 0 -5.8058 1.4078 -7.6 3.8 l -12.75 17 c -1.2 1.6 -1.2 3.8 0 5.4 l 12.75 17 c 1.7942 2.3922 4.6098 3.8 7.6 3.8 h ' +
+        (width - 23) +
+        ' v -47 z'
+      "
+      stroke="url(#paint4_linear_813_2370)"
+    />
+    <!-- Тень для центрального текста -->
+    <rect
+      opacity="0.7"
+      [attr.x]="item.leftLabel?.width ?? 7"
+      y="10"
+      [attr.width]="
+        width - (item.leftLabel?.width ?? 0) - (item.rightLabel?.width ?? 0) - 7
+      "
+      height="30"
+      fill="url(#paint5_radial_813_2370)"
+    />
+    <!-- Правый бордер надписи -->
+    <g *ngIf="item.rightLabel" opacity="0.35" filter="url(#filter2_d_813_2370)">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
-        d="M240.5 11.5C240.224 11.5 240 11.7239 240 12C240 12.2761 240.224 12.5 240.5 12.5L420.5 12.5C420.776 12.5 421 12.2762 421 12C421 11.7239 420.776 11.5 420.5 11.5L240.5 11.5ZM240.5 41.5C240.224 41.5 240 41.7239 240 42C240 42.2761 240.224 42.5 240.5 42.5L420.5 42.5C420.776 42.5 421 42.2762 421 42C421 41.7239 420.776 41.5 420.5 41.5L240.5 41.5Z"
-        fill="url(#paint9_radial_370_1431)"
-        fill-opacity="0.3"
+        [attr.d]="
+          'm ' +
+          (width - item.rightLabel.width! + 47.5) +
+          ' 10.5 l ' +
+          (item.rightLabel.width! - 72) +
+          ' 0.0001 v 1 l ' +
+          (item.rightLabel.width! - 72) * -1 +
+          ' -0.0001 c -5.247 0 -9.5 -4.2533 -9.5 -9.5 h 1 c 0 4.6944 3.806 8.5 8.5 8.5 z m 0 29.0001 l ' +
+          (item.rightLabel.width! - 72) +
+          ' -0.0001 v -1 l ' +
+          (item.rightLabel.width! - 72) * -1 +
+          ' 0.0001 c -5.247 0 -9.5 4.2533 -9.5 9.5 h 1 c 0 -4.6944 3.806 -8.5 8.5 -8.5 z'
+        "
+        fill="url(#paint6_linear_813_2370)"
       />
-      <!-- Все надписи -->
-      <!-- <g filter="url(#filter6_d_370_1431)">
-      <path
-        d="M578.808 28.384V27.072H583.416V28.384H578.808ZM586.148 28.384V27.072H590.756V28.384H586.148ZM593.046 26.096V24.192H594.95V26.096H593.046ZM593.046 32V30.096H594.95V32H593.046ZM597.233 28.384V27.072H601.841V28.384H597.233ZM604.572 28.384V27.072H609.18V28.384H604.572Z"
-        fill="#F9F9F9"
-      />
-      <path
-        d="M295.955 32.144C294.878 32.144 293.945 31.9093 293.155 31.44C292.366 30.96 291.753 30.288 291.315 29.424C290.889 28.5493 290.675 27.5253 290.675 26.352C290.675 25.168 290.889 24.144 291.315 23.28C291.753 22.416 292.366 21.7493 293.155 21.28C293.945 20.8107 294.878 20.576 295.955 20.576C297.022 20.576 297.95 20.8107 298.739 21.28C299.539 21.7493 300.153 22.416 300.579 23.28C301.017 24.144 301.235 25.1627 301.235 26.336C301.235 27.52 301.017 28.5493 300.579 29.424C300.153 30.288 299.539 30.96 298.739 31.44C297.95 31.9093 297.022 32.144 295.955 32.144ZM295.955 30.704C297.075 30.704 297.945 30.3253 298.563 29.568C299.193 28.8 299.507 27.728 299.507 26.352C299.507 24.976 299.198 23.9093 298.579 23.152C297.961 22.3947 297.086 22.016 295.955 22.016C294.835 22.016 293.961 22.3947 293.331 23.152C292.713 23.9093 292.403 24.976 292.403 26.352C292.403 27.728 292.713 28.8 293.331 29.568C293.961 30.3253 294.835 30.704 295.955 30.704ZM308.346 34.88V30.816C307.94 31.7013 307.247 32.144 306.266 32.144C305.7 32.144 305.199 31.9787 304.762 31.648C304.335 31.3173 303.999 30.848 303.754 30.24C303.519 29.632 303.402 28.9173 303.402 28.096C303.402 27.264 303.519 26.5493 303.754 25.952C303.999 25.344 304.335 24.8747 304.762 24.544C305.199 24.2133 305.7 24.048 306.266 24.048C306.756 24.048 307.178 24.1653 307.53 24.4C307.882 24.6347 308.154 24.96 308.346 25.376V20.72H309.962V25.36C310.154 24.944 310.426 24.624 310.778 24.4C311.13 24.1653 311.546 24.048 312.026 24.048C312.591 24.048 313.087 24.2133 313.514 24.544C313.951 24.8747 314.287 25.344 314.522 25.952C314.767 26.5493 314.89 27.264 314.89 28.096C314.89 28.9173 314.767 29.632 314.522 30.24C314.287 30.848 313.956 31.3173 313.53 31.648C313.103 31.9787 312.602 32.144 312.026 32.144C311.066 32.144 310.378 31.7067 309.962 30.832V34.88H308.346ZM306.698 30.912C307.21 30.912 307.615 30.6773 307.914 30.208C308.223 29.7387 308.378 29.0347 308.378 28.096C308.378 27.168 308.223 26.4693 307.914 26C307.615 25.5307 307.21 25.296 306.698 25.296C306.196 25.296 305.791 25.5307 305.482 26C305.172 26.4693 305.018 27.168 305.018 28.096C305.018 29.0347 305.167 29.7387 305.466 30.208C305.775 30.6773 306.186 30.912 306.698 30.912ZM311.594 30.912C312.106 30.912 312.511 30.6773 312.81 30.208C313.119 29.7387 313.274 29.0347 313.274 28.096C313.274 27.168 313.119 26.4693 312.81 26C312.511 25.5307 312.106 25.296 311.594 25.296C311.082 25.296 310.676 25.5307 310.378 26C310.079 26.4693 309.93 27.168 309.93 28.096C309.93 29.0347 310.079 29.7387 310.378 30.208C310.676 30.6773 311.082 30.912 311.594 30.912ZM321.857 34.88V30.816C321.452 31.7013 320.758 32.144 319.777 32.144C319.212 32.144 318.71 31.9787 318.273 31.648C317.846 31.3173 317.51 30.848 317.265 30.24C317.03 29.632 316.913 28.9173 316.913 28.096C316.913 27.264 317.03 26.5493 317.265 25.952C317.51 25.344 317.846 24.8747 318.273 24.544C318.71 24.2133 319.212 24.048 319.777 24.048C320.268 24.048 320.689 24.1653 321.041 24.4C321.393 24.6347 321.665 24.96 321.857 25.376V20.72H323.473V25.36C323.665 24.944 323.937 24.624 324.289 24.4C324.641 24.1653 325.057 24.048 325.537 24.048C326.102 24.048 326.598 24.2133 327.025 24.544C327.462 24.8747 327.798 25.344 328.033 25.952C328.278 26.5493 328.401 27.264 328.401 28.096C328.401 28.9173 328.278 29.632 328.033 30.24C327.798 30.848 327.468 31.3173 327.041 31.648C326.614 31.9787 326.113 32.144 325.537 32.144C324.577 32.144 323.889 31.7067 323.473 30.832V34.88H321.857ZM320.209 30.912C320.721 30.912 321.126 30.6773 321.425 30.208C321.734 29.7387 321.889 29.0347 321.889 28.096C321.889 27.168 321.734 26.4693 321.425 26C321.126 25.5307 320.721 25.296 320.209 25.296C319.708 25.296 319.302 25.5307 318.993 26C318.684 26.4693 318.529 27.168 318.529 28.096C318.529 29.0347 318.678 29.7387 318.977 30.208C319.286 30.6773 319.697 30.912 320.209 30.912ZM325.105 30.912C325.617 30.912 326.022 30.6773 326.321 30.208C326.63 29.7387 326.785 29.0347 326.785 28.096C326.785 27.168 326.63 26.4693 326.321 26C326.022 25.5307 325.617 25.296 325.105 25.296C324.593 25.296 324.188 25.5307 323.889 26C323.59 26.4693 323.441 27.168 323.441 28.096C323.441 29.0347 323.59 29.7387 323.889 30.208C324.188 30.6773 324.593 30.912 325.105 30.912ZM330.536 32.208L329.992 30.928C330.462 30.736 330.83 30.4747 331.096 30.144C331.363 29.8027 331.555 29.3333 331.672 28.736C331.79 28.128 331.848 27.344 331.848 26.384V24.192H337.8V32H336.184V25.488H333.352V26.432C333.352 27.6053 333.256 28.5813 333.064 29.36C332.872 30.1387 332.568 30.7573 332.152 31.216C331.747 31.664 331.208 31.9947 330.536 32.208ZM343.224 32.144C342.68 32.144 342.194 32.0373 341.768 31.824C341.341 31.6107 341 31.3227 340.744 30.96C340.498 30.5973 340.376 30.1867 340.376 29.728C340.376 29.152 340.52 28.6987 340.808 28.368C341.106 28.0373 341.592 27.7973 342.264 27.648C342.946 27.4987 343.864 27.424 345.016 27.424H345.56V27.008C345.56 26.4 345.432 25.9627 345.176 25.696C344.92 25.4293 344.498 25.296 343.912 25.296C343.464 25.296 343.016 25.3653 342.568 25.504C342.12 25.632 341.661 25.84 341.192 26.128L340.696 24.992C341.101 24.704 341.608 24.4747 342.216 24.304C342.824 24.1333 343.405 24.048 343.96 24.048C345.026 24.048 345.816 24.304 346.328 24.816C346.84 25.3173 347.096 26.1067 347.096 27.184V32H345.576V30.704C345.384 31.152 345.085 31.504 344.68 31.76C344.274 32.016 343.789 32.144 343.224 32.144ZM343.544 30.992C344.12 30.992 344.6 30.7893 344.984 30.384C345.368 29.9787 345.56 29.4667 345.56 28.848V28.416H345.032C344.253 28.416 343.64 28.4533 343.192 28.528C342.754 28.6027 342.44 28.7307 342.248 28.912C342.066 29.0827 341.976 29.3227 341.976 29.632C341.976 30.0373 342.114 30.368 342.392 30.624C342.669 30.8693 343.053 30.992 343.544 30.992ZM349.973 32V24.192H351.445V29.856L355.669 24.192H357.029V32H355.557V26.352L351.333 32H349.973ZM353.493 23.2C352.8 23.2 352.202 23.0187 351.701 22.656C351.21 22.2827 350.869 21.744 350.677 21.04L351.557 20.736C351.749 21.2587 352 21.6427 352.309 21.888C352.629 22.1333 353.029 22.256 353.509 22.256C354 22.256 354.394 22.1387 354.693 21.904C355.002 21.6693 355.274 21.2853 355.509 20.752L356.357 21.04C356.101 21.7973 355.722 22.3467 355.221 22.688C354.72 23.0293 354.144 23.2 353.493 23.2ZM359.937 32V24.192H361.553V27.344H365.441V24.192H367.057V32H365.441V28.624H361.553V32H359.937Z"
-        fill="#CF1717"
-      />
-      <path
-        d="M52.082 32V20.72H61.618V32H59.97V22.112H53.746V32H52.082ZM64.6379 32V24.192H66.2539V27.344H70.1419V24.192H71.7579V32H70.1419V28.624H66.2539V32H64.6379ZM74.3771 32V30.096H76.2811V32H74.3771Z"
-        fill="#F9F9F9"
-      />
-    </g> -->
     </g>
+    <!-- Левый бордер надписи -->
+    <g *ngIf="item.leftLabel" filter="url(#filter3_d_813_2370)">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        [attr.d]="
+          'm ' +
+          (item.leftLabel?.width! - 48) +
+          ' 10.5 l ' +
+          (item.leftLabel?.width! - 59) * -1 +
+          ' 0.0001 v 1 l ' +
+          (item.leftLabel?.width! - 59) +
+          ' -0.0001 c 5.247 0 9.5 -4.2533 9.5 -9.5 h -1 c 0 4.6944 -3.806 8.5 -8.5 8.5 z m 0 29.0001 l ' +
+          (item.leftLabel?.width! - 59) * -1 +
+          ' -0.0001 v -1 l ' +
+          (item.leftLabel?.width! - 59) +
+          ' 0.0001 c 5.247 0 9.5 4.2533 9.5 9.5 h -1 c 0 -4.6944 -3.806 -8.5 -8.5 -8.5 z'
+        "
+        fill="url(#paint7_linear_813_2370)"
+      />
+    </g>
+    <!-- Центральный бордер надписи -->
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      [attr.d]="
+        'm ' +
+        (9.5 + 70 + (item.leftLabel?.width ?? 0)) +
+        ' 9.5 c -0.276 0 -0.5 0.2239 -0.5 0.5 c 0 0.2761 0.224 0.5 0.5 0.5 l ' +
+        (width -
+          (item.leftLabel?.width ?? 0) -
+          (item.rightLabel?.width ?? 0) -
+          7 -
+          140) +
+        ' 0 c 0.276 0 0.5 -0.2238 0.5 -0.5 c 0 -0.2761 -0.224 -0.5 -0.5 -0.5 l ' +
+        (width -
+          (item.leftLabel?.width ?? 0) -
+          (item.rightLabel?.width ?? 0) -
+          7 -
+          140) *
+          -1 +
+        ' -0 z m 0 30 c -0.276 0 -0.5 0.2239 -0.5 0.5 c 0 0.2761 0.224 0.5 0.5 0.5 l ' +
+        (width -
+          (item.leftLabel?.width ?? 0) -
+          (item.rightLabel?.width ?? 0) -
+          7 -
+          140) +
+        ' 0 c 0.276 0 0.5 -0.2238 0.5 -0.5 c 0 -0.2761 -0.224 -0.5 -0.5 -0.5 l ' +
+        (width -
+          (item.leftLabel?.width ?? 0) -
+          (item.rightLabel?.width ?? 0) -
+          7 -
+          140) *
+          -1 +
+        ' 0 z'
+      "
+      fill="url(#paint8_radial_813_2370)"
+      fill-opacity="0.3"
+    />
     <defs>
+      <!-- x="475" -->
       <filter
-        id="filter0_d_370_1431"
-        x="-1"
+        id="filter0_d_813_2370"
+        [attr.x]="width - item.rightLabel?.width! - 2"
         y="0"
-        width="650"
-        height="58"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset dy="2" />
-        <feGaussianBlur stdDeviation="2.5" />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
-          result="shape"
-        />
-      </filter>
-      <filter
-        id="filter1_d_370_1431"
-        x="504"
-        y="2"
         width="43"
         height="52"
         filterUnits="userSpaceOnUse"
@@ -202,19 +277,19 @@
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
+          result="effect1_dropShadow_813_2370"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
+          in2="effect1_dropShadow_813_2370"
           result="shape"
         />
       </filter>
       <filter
-        id="filter2_d_370_1431"
-        x="113"
-        y="2"
+        id="filter1_d_813_2370"
+        [attr.x]="item.leftLabel?.width! - 41"
+        y="0"
         width="43"
         height="52"
         filterUnits="userSpaceOnUse"
@@ -237,55 +312,20 @@
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
+          result="effect1_dropShadow_813_2370"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
+          in2="effect1_dropShadow_813_2370"
           result="shape"
         />
       </filter>
       <filter
-        id="filter3_d_370_1431"
-        x="2.25"
-        y="1"
-        width="644.75"
-        height="54"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset dy="1" />
-        <feGaussianBlur stdDeviation="1.5" />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
-          result="shape"
-        />
-      </filter>
-      <filter
-        id="filter4_d_370_1431"
-        x="540.5"
-        y="2"
-        width="106.5"
+        id="filter2_d_813_2370"
+        [attr.x]="width - item.rightLabel?.width! + 35"
+        y="0"
+        [attr.width]="item.rightLabel?.width! - 56.5"
         height="52.0001"
         filterUnits="userSpaceOnUse"
         color-interpolation-filters="sRGB"
@@ -307,20 +347,20 @@
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
+          result="effect1_dropShadow_813_2370"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
+          in2="effect1_dropShadow_813_2370"
           result="shape"
         />
       </filter>
       <filter
-        id="filter5_d_370_1431"
-        x="12"
-        y="2"
-        width="106.5"
+        id="filter3_d_813_2370"
+        x="8"
+        y="0"
+        [attr.width]="item.leftLabel?.width! - 43.5"
         height="52.0001"
         filterUnits="userSpaceOnUse"
         color-interpolation-filters="sRGB"
@@ -342,158 +382,141 @@
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
+          result="effect1_dropShadow_813_2370"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
-          result="shape"
-        />
-      </filter>
-      <filter
-        id="filter6_d_370_1431"
-        x="19"
-        y="13"
-        width="620"
-        height="30"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset dy="1" />
-        <feGaussianBlur stdDeviation="1.5" />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_370_1431"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_dropShadow_370_1431"
+          in2="effect1_dropShadow_813_2370"
           result="shape"
         />
       </filter>
       <linearGradient
-        id="paint0_linear_370_1431"
-        x1="4.00002"
-        y1="27.0001"
-        x2="644"
-        y2="27"
+        id="paint0_linear_813_2370"
+        x1="2.39712e-05"
+        y1="25.0001"
+        [attr.x2]="width"
+        y2="25"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0048D7" stop-opacity="0.35" />
-        <stop offset="1" stop-color="#0048D7" stop-opacity="0" />
+        <stop stop-color="#0048D7" stop-opacity="0.75" />
+        <stop offset="0.56" stop-color="#0048D7" stop-opacity="0.3" />
+        <stop offset="0.98" stop-color="#0048D7" stop-opacity="0" />
       </linearGradient>
+      <!-- x1="515" -->
       <linearGradient
-        id="paint1_linear_370_1431"
-        x1="544"
-        y1="27"
-        x2="507"
-        y2="27"
+        id="paint1_linear_813_2370"
+        [attr.x1]="width - item.rightLabel?.width! + 37"
+        y1="25"
+        [attr.x2]="width - item.rightLabel?.width! + 1"
+        y2="25"
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#F8ECB2" />
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
       </linearGradient>
       <linearGradient
-        id="paint2_linear_370_1431"
-        x1="116"
-        y1="27"
-        x2="153"
-        y2="27"
+        id="paint2_linear_813_2370"
+        [attr.x1]="item.leftLabel?.width! - 38"
+        y1="25"
+        [attr.x2]="item.leftLabel?.width! - 1"
+        y2="25"
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#F8ECB2" />
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
       </linearGradient>
+      <!-- 'translate(102 25) rotate(180) scale(102 102)' -->
       <radialGradient
-        id="paint3_radial_370_1431"
+        id="paint3_radial_813_2370"
         cx="0"
         cy="0"
         r="1"
         gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(106 27) rotate(180) scale(102 102)"
+        [attr.gradientTransform]="
+          'translate(' +
+          (item.leftLabel?.width! - 48) +
+          ' 25) rotate(180) scale(' +
+          (item.leftLabel?.width! - 48) +
+          ' ' +
+          (item.leftLabel?.width! - 48) +
+          ')'
+        "
       >
         <stop stop-opacity="0" />
         <stop offset="1" stop-opacity="0.25" />
       </radialGradient>
       <linearGradient
-        id="paint4_linear_370_1431"
-        x1="4"
-        y1="26.9998"
-        x2="644"
-        y2="26.9998"
+        id="paint4_linear_813_2370"
+        x1="4.47024e-08"
+        y1="24.9998"
+        [attr.x2]="width"
+        y2="24.9998"
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#F7ECB2" />
-        <stop offset="0.513912" stop-color="#F7ECB2" stop-opacity="0.25" />
-        <stop offset="0.817708" stop-color="#F7ECB2" stop-opacity="0.38" />
+        <stop offset="0.513912" stop-color="#F7ECB2" stop-opacity="0.45" />
+        <stop offset="0.84136" stop-color="#F7ECB2" stop-opacity="0.12" />
         <stop offset="1" stop-color="white" stop-opacity="0" />
       </linearGradient>
+      <!-- translate(310 25) rotate(180) scale(160 51) -->
       <radialGradient
-        id="paint5_radial_370_1431"
+        id="paint5_radial_813_2370"
         cx="0"
         cy="0"
         r="1"
         gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(645 27) rotate(180) scale(102 102)"
-      >
-        <stop stop-opacity="0.25" />
-        <stop offset="1" stop-opacity="0" />
-      </radialGradient>
-      <radialGradient
-        id="paint6_radial_370_1431"
-        cx="0"
-        cy="0"
-        r="1"
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(330 27) rotate(180) scale(160 51)"
+        [attr.gradientTransform]="
+          'translate(' +
+          ((width -
+            (item.leftLabel?.width ?? 0) -
+            (item.rightLabel?.width ?? 0)) /
+            2 +
+            (item.leftLabel?.width ?? 0)) +
+          ' 25) rotate(180) scale(150 51)'
+        "
       >
         <stop stop-opacity="0.25" />
         <stop offset="1" stop-opacity="0" />
       </radialGradient>
       <linearGradient
-        id="paint7_linear_370_1431"
-        x1="643.505"
-        y1="46.5"
-        x2="543.5"
-        y2="46.5"
+        id="paint6_linear_813_2370"
+        x1="615.005"
+        y1="44.5"
+        x2="515"
+        y2="44.5"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F8ECB2" />
-        <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
+        <stop stop-color="#F8ECB2" stop-opacity="0" />
+        <stop offset="0.767639" stop-color="#F8ECB2" stop-opacity="0.6" />
+        <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.5" />
       </linearGradient>
       <linearGradient
-        id="paint8_linear_370_1431"
-        x1="15.4951"
-        y1="46.5"
-        x2="115.5"
-        y2="46.5"
+        id="paint7_linear_813_2370"
+        x1="11.4951"
+        y1="44.5"
+        [attr.x2]="item.leftLabel?.width! - 38.5"
+        y2="44.5"
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#F8ECB2" />
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
       </linearGradient>
       <radialGradient
-        id="paint9_radial_370_1431"
+        id="paint8_radial_813_2370"
         cx="0"
         cy="0"
         r="1"
         gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(329 11.4998) scale(92 516212)"
+        [attr.gradientTransform]="
+          'translate(' +
+          ((width -
+            (item.leftLabel?.width ?? 0) -
+            (item.rightLabel?.width ?? 0)) /
+            2 +
+            (item.leftLabel?.width ?? 0)) +
+          ' 9.49975) scale(92 516212)'
+        "
       >
         <stop stop-color="#F7EBB2" />
         <stop offset="1" stop-color="#F7EBB2" stop-opacity="0" />
