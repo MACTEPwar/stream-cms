@@ -1,3 +1,5 @@
+@import "/src/styles/_mixins.scss";
+
 .golden-grid {
   position: absolute;
   top: 0;
@@ -44,6 +46,10 @@
     &.right {
       margin-left: auto;
       margin-right: 60px;
+    }
+    &.left {
+      margin-right: auto;
+      margin-left: 60px;
     }
   }
   .descr {
@@ -95,5 +101,23 @@
       // background-color: rgba(0, 0, 255, 0.168);
     }
     width: calc(100% / 3);
+  }
+}
+
+.soc-netw-item {
+  display: flex;
+  img {
+    display: flex;
+    margin: auto;
+  }
+  a {
+    @include Link;
+    color: white;
+    text-decoration: underline;
+    margin: auto;
+    margin-left: 8px;
+  }
+  &.left {
+    margin-left: 60px;
   }
 }

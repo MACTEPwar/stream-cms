@@ -5,3 +5,11 @@
   line-height: 36px;
   letter-spacing: 0.08em;
 }
+
+@mixin Link {
+  font-family: "Nunito Sans";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+}
