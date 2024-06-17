@@ -91,16 +91,27 @@
   display: flex;
   justify-content: space-between;
   .slide-loader-item {
-    &:nth-child(1) {
-      // background-color: rgba(255, 255, 0, 0.135);
+    height: 10px;
+    display: flex;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+
+    & .loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      transform: translateX(-100%);
+      transition: none;
     }
-    &:nth-child(2) {
-      // background-color: rgba(255, 192, 203, 0.172);
+
+    &.active .loader {
+      transform: translateX(0);
+      transition: transform 1s ease-in-out;
     }
-    &:nth-child(3) {
-      // background-color: rgba(0, 0, 255, 0.168);
-    }
-    width: calc(100% / 3);
   }
 }
 

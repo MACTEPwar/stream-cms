@@ -1,20 +1,27 @@
-import { ChangeDetectorRef, Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {
+  ChangeDetectorRef,
+  EventEmitter,
+  Injectable,
+  TemplateRef,
+} from '@angular/core';
+import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
 import { Slide } from 'src/app/models/slide';
 import { Nullable } from 'src/app/models/t-nullable';
 
 @Injectable()
 export class SliderService {
   slides$: BehaviorSubject<Slide[]> = new BehaviorSubject<Slide[]>([]);
-  tiemer$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  tiemer$: BehaviorSubject<number> = new BehaviorSubject<number>(10);
+
+  onTimeOutSlide: EventEmitter<void> = new EventEmitter<void>();
 
   currentSlide$: BehaviorSubject<Nullable<Slide>> = new BehaviorSubject<
     Nullable<Slide>
   >(null);
 
-  timeOut: number = 3;
-
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+    this.startAutoPlay();
+  }
 
   addSlides(slides: Slide[]): void {
     this.slides$.next([...this.slides$.getValue(), ...slides]);
@@ -37,7 +44,29 @@ export class SliderService {
     } else {
       this.loadSlide(slides[currSlideIdx + 1].id!);
     }
+    this.refreshAutoPlay();
   }
 
   prev(): void {}
+
+  private stopAutoPlay$: Subject<void> = new Subject<void>();
+
+  startAutoPlay(): void {
+    interval(this.tiemer$.getValue() * 1000)
+      .pipe(takeUntil(this.stopAutoPlay$))
+      .subscribe({
+        next: () => {
+          this.onTimeOutSlide.emit();
+        },
+      });
+  }
+
+  stopAutoPlay(): void {
+    this.stopAutoPlay$.next();
+  }
+
+  refreshAutoPlay(): void {
+    this.stopAutoPlay();
+    this.startAutoPlay();
+  }
 }

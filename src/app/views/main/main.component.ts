@@ -57,6 +57,9 @@ import { AppTemplateDirective } from 'src/app/shared/directives/template.directi
 export class MainComponent implements OnInit {
   @ViewChildren(AppTemplateDirective) templates: Nullable<QueryList<any>> =
     null;
+
+  slides$: Observable<Slide[]>;
+  slideTimeOut$: Observable<number>;
   currentSlide$!: Observable<Nullable<Slide>>;
 
   currentSlideState = 'in';
@@ -71,6 +74,12 @@ export class MainComponent implements OnInit {
     this.shedule$ = this.sheduleService.getSheduleForListComponent$();
 
     this.sheduleService.loadShedule();
+
+    this.slides$ = this.sliderService.slides$;
+    this.slideTimeOut$ = this.sliderService.tiemer$;
+    this.sliderService.onTimeOutSlide.subscribe((res) => {
+      this.currentSlideState = 'out';
+    });
   }
 
   ngOnInit(): void {

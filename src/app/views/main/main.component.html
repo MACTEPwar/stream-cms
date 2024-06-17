@@ -45,7 +45,7 @@
               >@BelkaSmailyk</a
             >
           </div>
-          <div class="soc-netw-item left           ">
+          <div class="soc-netw-item left">
             <img src="../../../assets/tg_img.png" alt="" />
             <a href="https://www.youtube.com/@BelkaSmailyk" target="_blank"
               >@BelkaSmailykova</a
@@ -101,8 +101,23 @@
   <div class="btn btn-left"></div>
   <div class="btn btn-right" (click)="nextSlide()"></div>
   <div class="slide-loader-container">
-    <div class="slide-loader-item"></div>
-    <div class="slide-loader-item"></div>
-    <div class="slide-loader-item"></div>
+    <div
+      class="slide-loader-item"
+      [ngClass]="{ active: slide.id === (currentSlide$ | async)?.id }"
+      [ngStyle]="{
+        width: 'calc(100% / ' + (slides$ | async)?.length + ')',
+        'background-color': 'rgba(255, 255, 255, ' + (0.5 - ind * 0.15) + ')'
+      }"
+      *ngFor="let slide of slides$ | async; index as ind"
+    >
+      <div
+        class="loader"
+        [ngStyle]="{
+          transitionDuration: (slideTimeOut$ | async) + 's'
+        }"
+      ></div>
+    </div>
+    <!-- <div class="slide-loader-item"></div>
+    <div class="slide-loader-item"></div> -->
   </div>
 </div>
