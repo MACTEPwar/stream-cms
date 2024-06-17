@@ -9,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SButtonModule } from './shared/components/s-button/s-button.module';
 import { RequestsModule } from '@core';
-import { SheduleService } from '@app-services';
+import { DonatersService, SheduleService } from '@app-services';
 
 @NgModule({
   declarations: [AppComponent, MainComponent, NotFoundComponent],
@@ -21,7 +21,7 @@ import { SheduleService } from '@app-services';
     SButtonModule,
     RequestsModule,
   ],
-  providers: [SheduleService],
+  providers: [SheduleService, DonatersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

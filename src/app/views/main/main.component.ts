@@ -12,7 +12,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { SheduleService } from '@app-services';
+import { DonatersService, SheduleService } from '@app-services';
 import { Observable } from 'rxjs';
 import { SliderService } from 'src/app/core/app-services/slider.service';
 import { Slide } from 'src/app/models/slide';
@@ -61,19 +61,22 @@ export class MainComponent implements OnInit {
   slides$: Observable<Slide[]>;
   slideTimeOut$: Observable<number>;
   currentSlide$!: Observable<Nullable<Slide>>;
-
   currentSlideState = 'in';
 
   shedule$: Observable<Array<ListItem>>;
+  topDonaters$: Observable<Array<ListItem>>;
 
   constructor(
     private sliderService: SliderService,
     private cdr: ChangeDetectorRef,
-    private sheduleService: SheduleService
+    private sheduleService: SheduleService,
+    private donatersService: DonatersService
   ) {
     this.shedule$ = this.sheduleService.getSheduleForListComponent$();
+    this.topDonaters$ = this.donatersService.getTopDonatersForListComponent$();
 
     this.sheduleService.loadShedule();
+    this.donatersService.loadDonaters();
 
     this.slides$ = this.sliderService.slides$;
     this.slideTimeOut$ = this.sliderService.tiemer$;
