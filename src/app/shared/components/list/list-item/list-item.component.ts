@@ -22,6 +22,8 @@ export class ListItemComponent implements OnInit {
     this.recalcWidth();
 
     console.log(this.item);
+
+    // this.width = 680
   }
 
   recalcWidth(): void {
