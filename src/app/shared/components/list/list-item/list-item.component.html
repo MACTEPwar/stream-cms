@@ -25,9 +25,26 @@
         7 +
         'px'
     }"
-    class="content"
+    class="content scrolling-text"
+    #c
   >
-    <span>{{ item.content?.content }}</span>
+    <!-- <span #s>{{ item.content?.content }}</span> -->
+    <!-- [ngStyle]="{
+      animation: s.scrollWidth > c.offsetWidth + 40 ? '' : 'none',
+      transform: s.scrollWidth > c.offsetWidth + 40 ? '' : 'translateX(-50%)'
+    }" -->
+    <span
+      [ngStyle]="{
+        animation: s.offsetWidth > c.offsetWidth ? '' : 'none',
+        transform: s.offsetWidth > c.offsetWidth ? '' : 'translateX(-50%)'
+      }"
+      >{{
+         item.content?.content
+      }}</span
+    >
+    <span #s class="ttt" style="visibility: hidden">{{
+      item.content?.content
+    }}</span>
   </div>
   <div
     *ngIf="item.rightLabel"

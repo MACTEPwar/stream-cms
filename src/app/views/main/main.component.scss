@@ -10,6 +10,11 @@
   grid-template-rows: 2fr 2fr 6.66fr 5.33fr 5.33fr 10.66fr 10.66fr 5.33fr 5.33fr 6.66fr 2fr 2fr;
   grid-template-columns: 2fr 2fr 4fr 2.66fr 5.33fr 5.33fr 4.33fr 2.83fr 3.5fr 3.5fr 2.83fr 4.33fr 5.33fr 5.33fr 2.66fr 4fr 2fr 2fr;
 }
+@media (max-width: 450px) {
+  .golden-grid {
+    height: calc(100vh - 56px);
+  }
+}
 .bg-slide {
   grid-area: 1 / 1 / span 12 / span 18;
   // background: radial-gradient(206.16% 141.42% at 0% 0%, #1e00b2 0%, #106 100%);
@@ -21,7 +26,23 @@
   // background-image: url("../../../assets/BG_img.png");
 
   background-repeat: no-repeat !important;
-  background-size: 100% 100% !important;
+  background-size: auto 100% !important;
+  &.img-left {
+    background-position: left;
+  }
+  @media (max-width: 1700px) {
+    &.img-left {
+      background-position: right;
+    }
+  }
+  &.img-right {
+    background-position: right;
+  }
+  @media (max-width: 1700px) {
+    &.img-right {
+      background-position: left;
+    }
+  }
   // position: relative;
   // .content {
   //   grid-area: 4/2 / span 8 / span 5;
@@ -80,6 +101,8 @@
     &.shedule-width-social {
       display: grid;
       grid-area: 4/3 / span 7 / span 14;
+      // transform: scale(1,0.9);
+      margin-top: -35px;
     }
   }
 

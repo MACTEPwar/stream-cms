@@ -31,7 +31,7 @@ export class SheduleService {
           // leftLabel: null,
           rightLabel: {
             content: mm.time ?? '--:--',
-            width: 113,
+            width: 103,
             color: 'white',
           },
           // rightLabel: null,

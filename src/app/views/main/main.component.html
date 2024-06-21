@@ -8,7 +8,7 @@
     <div
       [@slideAnimation]="currentSlideState"
       (@slideAnimation.done)="onAnimationDone($event)"
-      class="silder"
+      class="silder img-left"
       style="
         background-image: url('../../../assets/BG_img2.png');
         grid-area: 1 / 1 / span 12 / span 13;
@@ -87,12 +87,12 @@
     </div>
   </ng-template>
 
-  <!-- <ng-template appTemplate="slide">
+  <ng-template appTemplate="slide">
     <div class="bg-slide"></div>
     <div
       [@fromRightToLieft]="currentSlideState"
       (@fromRightToLieft.done)="onAnimationDone($event)"
-      class="silder"
+      class="silder img-right"
       style="
         background-image: url('../../../assets/BG_img.png');
         grid-area: 1 / 6 / span 12 / span 13;
@@ -112,9 +112,9 @@
         </div>
       </div>
     </div>
-  </ng-template> -->
+  </ng-template>
 
-  <!-- <div class="btn btn-left"></div>
+  <div class="btn btn-left"></div>
   <div class="btn btn-right" (click)="nextSlide()"></div>
   <div class="slide-loader-container">
     <div
@@ -133,5 +133,5 @@
         }"
       ></div>
     </div>
-  </div> -->
+  </div>
 </div>
