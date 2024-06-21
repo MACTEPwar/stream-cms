@@ -61,14 +61,18 @@
         (width - 23.5) +
         ' v -47 z'
       "
-      fill="url(#paint0_linear_813_2370)"
+      [attr.fill]="'url(#paint0_linear_813_2370_' + uniqueId + ')'"
     />
 
     <!-- Правая вертикалка -->
     <!-- x="477" -->
-    <g *ngIf="item.rightLabel" opacity="0.35" filter="url(#filter0_d_813_2370)">
+    <g
+      *ngIf="item.rightLabel"
+      opacity="0.35"
+      [attr.filter]="'url(#filter0_d_813_2370_' + uniqueId + ')'"
+    >
       <mask
-        id="mask0_813_2370"
+        [attr.id]="'mask0_813_2370_' + uniqueId"
         style="mask-type: alpha"
         maskUnits="userSpaceOnUse"
         [attr.x]="width - item.rightLabel.width!"
@@ -86,7 +90,7 @@
           fill="#D9D9D9"
         />
       </mask>
-      <g mask="url(#mask0_813_2370)">
+      <g [attr.mask]="'url(#mask0_813_2370_' + uniqueId + ')'">
         <!-- 527 -->
         <path
           fill-rule="evenodd"
@@ -96,15 +100,19 @@
             (width - item.rightLabel.width! + 50) +
             ' 0 c 0 0.335 -0.007 0.6684 -0.02 1 h 1 c 0.013 -0.3317 0.02 -0.6651 0.02 -1 c 0 -13.8071 -11.193 -25 -25 -25 c -13.807 0 -25 11.1929 -25 25 c 0 4.5536 1.217 8.8228 3.345 12.5 c -2.128 3.6772 -3.345 7.9464 -3.345 12.5 c 0 4.3487 1.11 8.438 3.063 12 c -1.953 3.562 -3.063 7.6513 -3.063 12 c 0 13.8071 11.193 25 25 25 c 13.807 0 25 -11.1929 25 -25 h -1 c 0 13.2548 -10.745 24 -24 24 c -13.255 0 -24 -10.7452 -24 -24 c 0 -3.9568 0.958 -7.69 2.654 -10.9805 c 4.391 7.1851 12.309 11.9805 21.346 11.9805 c 2.438 0 4.795 -0.3491 7.023 -1 h -7.023 c -8.883 0 -16.64 -4.8264 -20.789 -12 c 4.149 -7.1736 11.906 -12 20.789 -12 h 4 c 0.944 0.2439 1.366 0.611 2 1.5 l 6 -2 l -6 -2 c -0.648 0.757 -1.063 1.1173 -2 1.5 h -4 c -8.675 0 -16.276 -4.603 -20.492 -11.5 c 4.216 -6.897 11.817 -11.5 20.492 -11.5 h 7.023 c -2.228 -0.6509 -4.585 -1 -7.023 -1 c -8.843 0 -16.614 4.5918 -21.059 11.5212 c -1.875 -3.4198 -2.941 -7.346 -2.941 -11.5212 c 0 -13.2548 10.745 -24 24 -24 c 13.255 0 24 10.7452 24 24 z m -45.059 13.4788 c -1.875 3.4198 -2.941 7.346 -2.941 11.5212 c 0 3.9568 0.958 7.69 2.654 10.9804 c 3.559 -5.8238 9.435 -10.0776 16.346 -11.4804 c -6.728 -1.3656 -12.475 -5.4334 -16.059 -11.0212 z'
           "
-          fill="url(#paint1_linear_813_2370)"
+          [attr.fill]="'url(#paint1_linear_813_2370_' + uniqueId + ')'"
         />
       </g>
     </g>
     <!-- Левая вертикалка -->
     <!-- x="112" -->
-    <g *ngIf="item.leftLabel" opacity="0.5" filter="url(#filter1_d_813_2370)">
+    <g
+      *ngIf="item.leftLabel"
+      opacity="0.5"
+      [attr.filter]="'url(#filter1_d_813_2370_' + uniqueId + ')'"
+    >
       <mask
-        id="mask1_813_2370"
+        [attr.id]="'mask1_813_2370_' + uniqueId"
         style="mask-type: alpha"
         maskUnits="userSpaceOnUse"
         [attr.x]="item.leftLabel.width! - 38"
@@ -120,7 +128,7 @@
           fill="#D9D9D9"
         />
       </mask>
-      <g mask="url(#mask1_813_2370)">
+      <g [attr.mask]="'url(#mask1_813_2370_' + uniqueId + ')'">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -129,7 +137,7 @@
             (item.leftLabel.width! - 50) +
             ' 0 c 0 0.335 0.007 0.6684 0.02 1 h -1.0004 c -0.013 -0.3317 -0.0196 -0.6651 -0.0196 -1 c 0 -13.8071 11.193 -25 25 -25 c 13.807 0 25 11.1929 25 25 c 0 4.5536 -1.217 8.8228 -3.345 12.5 c 2.128 3.6772 3.345 7.9464 3.345 12.5 c 0 4.3487 -1.11 8.438 -3.063 12 c 1.953 3.562 3.063 7.6513 3.063 12 c 0 13.8071 -11.193 25 -25 25 c -13.807 0 -25 -11.1929 -25 -25 h 1 c 0 13.2548 10.745 24 24 24 c 13.255 0 24 -10.7452 24 -24 c 0 -3.9568 -0.958 -7.69 -2.654 -10.9805 c -4.391 7.1851 -12.309 11.9805 -21.346 11.9805 c -2.438 0 -4.795 -0.3491 -7.023 -1 h 7.023 c 8.883 0 16.64 -4.8264 20.789 -12 c -4.149 -7.1736 -11.906 -12 -20.789 -12 h -4 c -0.944 0.2439 -1.366 0.611 -2 1.5 l -6 -2 l 6 -2 c 0.648 0.757 1.063 1.1173 2 1.5 h 4 c 8.675 0 16.276 -4.603 20.492 -11.5 c -4.216 -6.897 -11.817 -11.5 -20.492 -11.5 h -7.023 c 2.228 -0.6509 4.585 -1 7.023 -1 c 8.843 0 16.614 4.5918 21.059 11.5212 c 1.875 -3.4198 2.941 -7.346 2.941 -11.5212 c 0 -13.2548 -10.745 -24 -24 -24 c -13.255 0 -24 10.7452 -24 24 z m 45.059 13.4788 c 1.875 3.4198 2.941 7.346 2.941 11.5212 c 0 3.9568 -0.958 7.69 -2.654 10.9804 c -3.559 -5.8238 -9.435 -10.0776 -16.346 -11.4804 c 6.728 -1.3656 12.475 -5.4334 16.059 -11.0212 z'
           "
-          fill="url(#paint2_linear_813_2370)"
+          [attr.fill]="'url(#paint2_linear_813_2370_' + uniqueId + ')'"
         />
       </g>
     </g>
@@ -143,7 +151,7 @@
         (item.leftLabel?.width! - 60.25) * -1 +
         ' l -8.9988 -11.9985 c -1.3339 -1.7785 -1.3333 -4.2241 0.0015 -6.0019 l 9.0089 -11.9996 z'
       "
-      fill="url(#paint3_radial_813_2370)"
+      [attr.fill]="'url(#paint3_radial_813_2370_' + uniqueId + ')'"
     />
     <!-- Общая обводка -->
     <path
@@ -156,7 +164,7 @@
         (width - 23) +
         ' v -47 z'
       "
-      stroke="url(#paint4_linear_813_2370)"
+      [attr.stroke]="'url(#paint4_linear_813_2370_' + uniqueId + ')'"
     />
     <!-- Тень для центрального текста -->
     <rect
@@ -167,10 +175,14 @@
         width - (item.leftLabel?.width ?? 0) - (item.rightLabel?.width ?? 0) - 7
       "
       height="30"
-      fill="url(#paint5_radial_813_2370)"
+      [attr.fill]="'url(#paint5_radial_813_2370_' + uniqueId + ')'"
     />
     <!-- Правый бордер надписи -->
-    <g *ngIf="item.rightLabel" opacity="0.35" filter="url(#filter2_d_813_2370)">
+    <g
+      *ngIf="item.rightLabel"
+      opacity="0.35"
+      [attr.filter]="'url(#filter2_d_813_2370_' + uniqueId + ')'"
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -187,11 +199,14 @@
           (item.rightLabel.width! - 72) * -1 +
           ' 0.0001 c -5.247 0 -9.5 4.2533 -9.5 9.5 h 1 c 0 -4.6944 3.806 -8.5 8.5 -8.5 z'
         "
-        fill="url(#paint6_linear_813_2370)"
+        [attr.fill]="'url(#paint6_linear_813_2370_' + uniqueId + ')'"
       />
     </g>
     <!-- Левый бордер надписи -->
-    <g *ngIf="item.leftLabel" filter="url(#filter3_d_813_2370)">
+    <g
+      *ngIf="item.leftLabel"
+      [attr.filter]="'url(#filter3_d_813_2370_' + uniqueId + ')'"
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -208,7 +223,7 @@
           (item.leftLabel?.width! - 59) +
           ' 0.0001 c 5.247 0 9.5 4.2533 9.5 9.5 h -1 c 0 -4.6944 -3.806 -8.5 -8.5 -8.5 z'
         "
-        fill="url(#paint7_linear_813_2370)"
+        [attr.fill]="'url(#paint7_linear_813_2370_' + uniqueId + ')'"
       />
     </g>
     <!-- Центральный бордер надписи -->
@@ -246,13 +261,13 @@
           -1 +
         ' 0 z'
       "
-      fill="url(#paint8_radial_813_2370)"
+      [attr.fill]="'url(#paint8_radial_813_2370_' + uniqueId + ')'"
       fill-opacity="0.3"
     />
     <defs>
       <!-- x="475" -->
       <filter
-        id="filter0_d_813_2370"
+        [attr.id]="'filter0_d_813_2370_' + uniqueId"
         [attr.x]="width - item.rightLabel?.width! - 2"
         y="0"
         width="43"
@@ -287,7 +302,7 @@
         />
       </filter>
       <filter
-        id="filter1_d_813_2370"
+        [attr.id]="'filter1_d_813_2370_' + uniqueId"
         [attr.x]="item.leftLabel?.width! - 41"
         y="0"
         width="43"
@@ -322,7 +337,7 @@
         />
       </filter>
       <filter
-        id="filter2_d_813_2370"
+        [attr.id]="'filter2_d_813_2370_' + uniqueId"
         [attr.x]="width - item.rightLabel?.width! + 35"
         y="0"
         [attr.width]="item.rightLabel?.width! - 56.5"
@@ -357,7 +372,7 @@
         />
       </filter>
       <filter
-        id="filter3_d_813_2370"
+        [attr.id]="'filter3_d_813_2370_' + uniqueId"
         x="8"
         y="0"
         [attr.width]="item.leftLabel?.width! - 43.5"
@@ -392,7 +407,7 @@
         />
       </filter>
       <linearGradient
-        id="paint0_linear_813_2370"
+        [attr.id]="'paint0_linear_813_2370_' + uniqueId"
         x1="2.39712e-05"
         y1="25.0001"
         [attr.x2]="width"
@@ -405,7 +420,7 @@
       </linearGradient>
       <!-- x1="515" -->
       <linearGradient
-        id="paint1_linear_813_2370"
+        [attr.id]="'paint1_linear_813_2370_' + uniqueId"
         [attr.x1]="width - item.rightLabel?.width! + 37"
         y1="25"
         [attr.x2]="width - item.rightLabel?.width! + 1"
@@ -416,7 +431,7 @@
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
       </linearGradient>
       <linearGradient
-        id="paint2_linear_813_2370"
+        [attr.id]="'paint2_linear_813_2370_' + uniqueId"
         [attr.x1]="item.leftLabel?.width! - 38"
         y1="25"
         [attr.x2]="item.leftLabel?.width! - 1"
@@ -428,7 +443,7 @@
       </linearGradient>
       <!-- 'translate(102 25) rotate(180) scale(102 102)' -->
       <radialGradient
-        id="paint3_radial_813_2370"
+        [attr.id]="'paint3_radial_813_2370_' + uniqueId"
         cx="0"
         cy="0"
         r="1"
@@ -447,7 +462,7 @@
         <stop offset="1" stop-opacity="0.25" />
       </radialGradient>
       <linearGradient
-        id="paint4_linear_813_2370"
+        [attr.id]="'paint4_linear_813_2370_' + uniqueId"
         x1="4.47024e-08"
         y1="24.9998"
         [attr.x2]="width"
@@ -461,7 +476,7 @@
       </linearGradient>
       <!-- translate(310 25) rotate(180) scale(160 51) -->
       <radialGradient
-        id="paint5_radial_813_2370"
+        [attr.id]="'paint5_radial_813_2370_' + uniqueId"
         cx="0"
         cy="0"
         r="1"
@@ -480,7 +495,7 @@
         <stop offset="1" stop-opacity="0" />
       </radialGradient>
       <linearGradient
-        id="paint6_linear_813_2370"
+        [attr.id]="'paint6_linear_813_2370_' + uniqueId"
         [attr.x1]="width - 24.995"
         y1="44.5"
         [attr.x2]="width - item.rightLabel?.width! + 37"
@@ -492,7 +507,7 @@
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.5" />
       </linearGradient>
       <linearGradient
-        id="paint7_linear_813_2370"
+        [attr.id]="'paint7_linear_813_2370_' + uniqueId"
         x1="11.4951"
         y1="44.5"
         [attr.x2]="item.leftLabel?.width! - 38.5"
@@ -503,7 +518,7 @@
         <stop offset="1" stop-color="#F8ECB2" stop-opacity="0.1" />
       </linearGradient>
       <radialGradient
-        id="paint8_radial_813_2370"
+        [attr.id]="'paint8_radial_813_2370_' + uniqueId"
         cx="0"
         cy="0"
         r="1"

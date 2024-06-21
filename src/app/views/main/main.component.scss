@@ -38,7 +38,98 @@
   // }
 }
 .content {
-  grid-area: 4/2 / span 8 / span 5;
+  &.shedule-width-social {
+    display: none;
+    .soc {
+      flex-wrap: wrap;
+    }
+    .soc-netw-item {
+      display: flex;
+      width: 200px;
+      img {
+        display: flex;
+        // margin: auto;
+      }
+      a {
+        @include Link;
+        color: white;
+        text-decoration: underline;
+        margin: auto;
+        margin-left: 8px;
+      }
+      &.right {
+        margin-right: 60px;
+      }
+    }
+  }
+  &.shedule {
+    grid-area: 4/12 / span 7 / span 7;
+  }
+  @media (max-width: 1205px) {
+    &.shedule {
+      grid-area: 4/8 / span 7 / span 11;
+    }
+  }
+  @media (max-width: 775px) {
+    &.shedule {
+      display: none;
+    }
+    &.social {
+      display: none;
+    }
+    &.shedule-width-social {
+      display: grid;
+      grid-area: 4/3 / span 7 / span 14;
+    }
+  }
+
+  &.social {
+    grid-area: 4/2 / span 7 / span 7;
+
+    .soc-netw-item {
+      display: flex;
+      img {
+        display: flex;
+        margin: auto;
+      }
+      a {
+        @include Link;
+        color: white;
+        text-decoration: underline;
+        margin: auto;
+        margin-left: 8px;
+      }
+      &.left {
+        margin-left: 60px;
+      }
+    }
+  }
+  @media (max-width: 1205px) {
+    &.social {
+      grid-area: 4/2 / span 7 / span 4;
+      .descr {
+        flex-direction: column;
+        .soc-netw-item {
+          display: flex;
+          img {
+            display: flex;
+            // margin: auto;
+            margin: 0px;
+          }
+          a {
+            @include Link;
+            color: white;
+            text-decoration: underline;
+            // margin: auto;
+            margin-left: 8px;
+          }
+          &.left {
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+  }
   display: flex;
   flex-direction: column;
   .title {
@@ -112,23 +203,5 @@
       transform: translateX(0);
       transition: transform 1s ease-in-out;
     }
-  }
-}
-
-.soc-netw-item {
-  display: flex;
-  img {
-    display: flex;
-    margin: auto;
-  }
-  a {
-    @include Link;
-    color: white;
-    text-decoration: underline;
-    margin: auto;
-    margin-left: 8px;
-  }
-  &.left {
-    margin-left: 60px;
   }
 }

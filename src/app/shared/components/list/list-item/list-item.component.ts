@@ -16,7 +16,11 @@ export class ListItemComponent implements OnInit {
   l1ForRightArrowStatic = 27 - 5;
   l1ForRightArrowOffset = 0;
 
-  constructor(private el: ElementRef) {}
+  public uniqueId: string;
+
+  constructor(private el: ElementRef) {
+    this.uniqueId = this.generateUniqueId();
+  }
 
   ngOnInit(): void {
     this.recalcWidth();
@@ -31,5 +35,9 @@ export class ListItemComponent implements OnInit {
       this.item.leftLabel?.width! - this.l1ForLeftArrowStatic;
     this.l1ForRightArrowOffset =
       this.item.rightLabel?.width! - this.l1ForRightArrowStatic;
+  }
+
+  private generateUniqueId(): string {
+    return 'id-' + Math.random().toString(36).substr(2, 9);
   }
 }

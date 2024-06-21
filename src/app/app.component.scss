@@ -19,6 +19,11 @@ nav {
     margin-top: auto;
     margin-bottom: auto;
   }
+  @media (max-width: 1360px) {
+    .separator {
+      display: none;
+    }
+  }
   .navs {
     display: flex;
     .nav-item {
@@ -65,12 +70,41 @@ nav {
       }
     }
   }
+  @media (max-width: 1360px) {
+    .navs {
+      display: none;
+    }
+  }
   .sur {
     margin-left: auto;
     width: 320px;
     img {
       margin-top: -7px;
       margin-right: 8px;
+    }
+  }
+  @media (max-width: 1360px) {
+    .sur {
+      margin-right: 20px;
+    }
+  }
+  @media (max-width: 610px) {
+    .sur {
+      display: none;
+    }
+  }
+
+  .toggle-nav {
+    display: none;
+  }
+  @media (max-width: 1360px) {
+    .toggle-nav {
+      display: flex;
+    }
+  }
+  @media (max-width: 610px) {
+    .toggle-nav {
+      margin-left: auto;
     }
   }
 }

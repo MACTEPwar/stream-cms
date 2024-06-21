@@ -24,13 +24,14 @@ export class SheduleService {
         return m.map((mm, i) => ({
           leftLabel: {
             content: mm.dayOfWeek ?? '',
-            width: 150,
+            // width: 150,
+            width: 100,
             color: 'white',
           },
           // leftLabel: null,
           rightLabel: {
             content: mm.time ?? '--:--',
-            width: 163,
+            width: 113,
             color: 'white',
           },
           // rightLabel: null,
