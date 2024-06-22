@@ -61,6 +61,7 @@
 .content {
   &.shedule-width-social {
     display: none;
+    overflow-x: auto;
     .soc {
       flex-wrap: wrap;
     }
@@ -100,7 +101,7 @@
     }
     &.shedule-width-social {
       display: grid;
-      grid-area: 4/3 / span 7 / span 14;
+      grid-area: 4/3 / span 8 / span 14;
       // transform: scale(1,0.9);
       margin-top: -35px;
     }
@@ -197,6 +198,16 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;
+  }
+  @media (max-width: 420px) {
+    &-left {
+      grid-area: 1 / 1 / span 12 / span 2;
+      background-size: auto 25px;
+    }
+    &-right {
+      grid-area: 1 / 17 / span 12 / span 2;
+      background-size: auto 25px;
+    }
   }
 }
 .slide-loader-container {
