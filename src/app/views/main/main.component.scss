@@ -5,16 +5,16 @@
   top: 0;
   left: 0;
   display: grid;
-  height: 100vh;
+  height: calc(var(--vh) * 1);
   width: 100%;
   grid-template-rows: 2fr 2fr 6.66fr 5.33fr 5.33fr 10.66fr 10.66fr 5.33fr 5.33fr 6.66fr 2fr 2fr;
   grid-template-columns: 2fr 2fr 4fr 2.66fr 5.33fr 5.33fr 4.33fr 2.83fr 3.5fr 3.5fr 2.83fr 4.33fr 5.33fr 5.33fr 2.66fr 4fr 2fr 2fr;
 }
-@media (max-width: 450px) {
-  .golden-grid {
-    height: calc(100vh - 56px);
-  }
-}
+// @media (max-width: 450px) {
+//   .golden-grid {
+//     height: calc(100vh - 56px);
+//   }
+// }
 .bg-slide {
   grid-area: 1 / 1 / span 12 / span 18;
   // background: radial-gradient(206.16% 141.42% at 0% 0%, #1e00b2 0%, #106 100%);
