@@ -20,7 +20,7 @@ export class SliderService {
   >(null);
 
   constructor(private cdr: ChangeDetectorRef) {
-    // this.startAutoPlay();
+    this.startAutoPlay();
   }
 
   addSlides(slides: Slide[]): void {

@@ -107,6 +107,16 @@
     }
   }
 
+  &.top-donaters {
+    grid-area: 4/2 / span 7 / span 7;
+  }
+
+  @media (max-width: 1000px) {
+    &.top-donaters {
+      grid-area: 4/3 / span 8 / span 14;
+    }
+  }
+
   &.social {
     grid-area: 4/2 / span 7 / span 7;
 
