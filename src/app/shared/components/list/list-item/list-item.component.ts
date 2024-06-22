@@ -25,7 +25,7 @@ export class ListItemComponent implements OnInit {
   ngOnInit(): void {
     this.recalcWidth();
 
-    console.log(this.item);
+    // console.log(this.item);
 
     // this.width = 680
   }

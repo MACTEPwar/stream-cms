@@ -199,7 +199,17 @@
     background-repeat: no-repeat;
     background-size: auto;
   }
-  @media (max-width: 420px) {
+  @media (max-width: 1400px) {
+    &-left {
+      grid-area: 1 / 1 / span 12 / span 1;
+      background-size: auto 30px;
+    }
+    &-right {
+      grid-area: 1 / 18 / span 12 / span 1;
+      background-size: auto 25px;
+    }
+  }
+  @media (max-width: 1000px) {
     &-left {
       grid-area: 1 / 1 / span 12 / span 2;
       background-size: auto 25px;
