@@ -4,6 +4,9 @@
   font-size: 28px;
   line-height: 36px;
   letter-spacing: 0.08em;
+  // @media (max-width: 420px) {
+  //   font-size: 20px;
+  // }
 }
 
 @mixin Link {

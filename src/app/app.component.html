@@ -8,7 +8,7 @@
     );
   "
 >
-  <div style="grid-area: 2 / 2 / span 2 / span 16; z-index: 1">
+  <div style="grid-area: 2 / 2 / span 2 / span 16; z-index: 2">
     <nav>
       <div class="logo">
         <span>Belochka</span>
@@ -40,8 +40,56 @@
           <span>ПОДДЕРЖАТЬ</span>
         </app-button>
       </div>
-      <div class="toggle-nav">
+      <div
+        class="toggle-nav"
+        (click)="changeVisibleNav(!visibleNavs$.getValue())"
+      >
         <img width="30px" src="../assets/menu_icon.svg" alt="" />
+      </div>
+      <div class="navs-mob" [ngClass]="{ show: visibleNavs$ | async }">
+        <div class="golden-grid">
+          <div class="container-full">
+            <div class="container-content">
+              <div class="nav-item active">
+                <span>ГЛАВНАЯ</span>
+                <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="nav-item">
+                <span>НОВОСТИ</span>
+                <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="nav-item">
+                <span>ТУРНИРЫ</span> <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="nav-item">
+                <span>ВИДЕО</span> <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="nav-item">
+                <span>О СЕБЕ</span> <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="btn">
+                <app-button>
+                  <span>ВОЙТИ</span>
+                </app-button>
+              </div>
+              <div class="btn">
+                <app-button>
+                  <span>РЕГЕСТРАЦИЯ</span>
+                </app-button>
+              </div>
+              <div class="btn">
+                <app-button>
+                  <span>КАБИНЕТ</span>
+                </app-button>
+              </div>
+              <div class="btn">
+                <app-button>
+                  <span>ВЫЙТИ</span>
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>

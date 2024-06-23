@@ -11,6 +11,11 @@ nav {
       margin-bottom: auto;
     }
   }
+  @media (max-width: 420px) {
+    .logo {
+      font-size: 30px;
+    }
+  }
   .separator {
     margin-left: 48px;
     margin-right: 48px;
@@ -22,6 +27,82 @@ nav {
   @media (max-width: 1360px) {
     .separator {
       display: none;
+    }
+  }
+  .navs-mob {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    &.show {
+      opacity: 1;
+    }
+    .container-full {
+      margin-top: 45px;
+      grid-area: 2 / 1 / span 10 / span 18;
+      z-index: 2;
+
+      .container-content {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        background-color: rgba(17, 17, 17, 0.6);
+        padding-top: 25px;
+        display: flex;
+        flex-direction: column;
+        .btn {
+          width: 70%;
+          margin: auto;
+        }
+        .nav-item {
+          position: relative;
+          width: fit-content;
+          opacity: 0.8;
+          margin-right: auto;
+          margin-left: auto;
+          margin-bottom: 25px;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          letter-spacing: 0.08em;
+
+          &:hover {
+            opacity: 1;
+            cursor: pointer;
+          }
+          &.active {
+            img {
+              opacity: 1;
+            }
+            opacity: 1;
+          }
+
+          img {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            bottom: -11px;
+          }
+
+          /* For Firefox */
+          @-moz-document url-prefix() {
+            img {
+              width: -moz-available; /* Firefox-specific property */
+            }
+          }
+
+          /* For Chrome */
+          @supports (-webkit-appearance: none) {
+            img {
+              width: -webkit-fill-available; /* Chrome-specific property */
+            }
+          }
+        }
+      }
     }
   }
   .navs {
@@ -96,6 +177,8 @@ nav {
 
   .toggle-nav {
     display: none;
+    z-index: 1;
+    cursor: pointer;
   }
   @media (max-width: 1360px) {
     .toggle-nav {
