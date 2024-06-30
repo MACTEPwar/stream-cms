@@ -1,4 +1,4 @@
-<div class="content-container">
+<div class="content-container" (click)="onClick.emit()">
   <div class="content">
     <ng-content></ng-content>
   </div>
@@ -88,7 +88,10 @@
     />
   </mask>
   <g [attr.mask]="'url(#mask0_406_2532_' + uniqueId + ')'">
-    <g style="mix-blend-mode: overlay" [attr.filter]="'url(#filter2_d_406_2532_' + uniqueId + ')'">
+    <g
+      style="mix-blend-mode: overlay"
+      [attr.filter]="'url(#filter2_d_406_2532_' + uniqueId + ')'"
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

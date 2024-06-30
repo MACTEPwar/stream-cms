@@ -1,4 +1,11 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -6,6 +13,8 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
+  @Output() onClick: EventEmitter<void> = new EventEmitter<void>();
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.updateWidth();
@@ -27,12 +36,38 @@ export class ButtonComponent implements OnInit {
   offsetLayer4: number = 0;
   staticWidthLayer4: number = 30 + 30 + 10;
 
+  private observers: MutationObserver[] = [];
+
   constructor(private el: ElementRef) {
     this.uniqueId = this.generateUniqueId();
+
+    this.observeElement(this.el.nativeElement);
+    let currentElement = this.el.nativeElement;
+
+    while (currentElement.parentElement) {
+      currentElement = currentElement.parentElement;
+      this.observeElement(currentElement);
+    }
   }
 
   ngOnInit(): void {
     this.updateWidth();
+  }
+
+  private observeElement(element: HTMLElement) {
+    const observer = new MutationObserver(() => {
+      const display = window.getComputedStyle(element).display;
+      if (display === 'block') {
+        this.updateWidth();
+      }
+    });
+
+    observer.observe(element, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+    });
+
+    this.observers.push(observer);
   }
 
   updateWidth(): void {
