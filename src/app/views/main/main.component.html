@@ -5,15 +5,20 @@
 
   <ng-template appTemplate="slide">
     <div class="bg-slide"></div>
+    <!-- background-image: url('../../../assets/BG_img2.png'); -->
     <div
       [@slideAnimation]="currentSlideState"
       (@slideAnimation.done)="onAnimationDone($event)"
-      class="silder img-left"
-      style="
-        background-image: url('../../../assets/BG_img2.png');
-        grid-area: 1 / 1 / span 12 / span 13;
-      "
-    ></div>
+      class="silder sl-1"
+    >
+      <div class="image img-left">
+        <img
+          src="https://cdn6.aptoide.com/imgs/6/a/e/6ae6d198b1cddc9a48652d4c9c35fed5.png"
+          alt=""
+          height="100%"
+        />
+      </div>
+    </div>
     <div
       class="golden-grid"
       [@slideTranslate2]="currentSlideState"
@@ -92,12 +97,12 @@
     <div
       [@fromRightToLieft]="currentSlideState"
       (@fromRightToLieft.done)="onAnimationDone($event)"
-      class="silder img-right"
-      style="
-        background-image: url('../../../assets/BG_img.png');
-        grid-area: 1 / 6 / span 12 / span 13;
-      "
-    ></div>
+      class="silder sl-2"
+    >
+      <div class="image img-right">
+        <img src="../../../assets/BG_4.webp" alt="" height="100%" />
+      </div>
+    </div>
     <div
       class="golden-grid"
       style="overflow: hidden"

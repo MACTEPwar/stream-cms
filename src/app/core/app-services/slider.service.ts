@@ -44,7 +44,7 @@ export class SliderService {
     } else {
       this.loadSlide(slides[currSlideIdx + 1].id!);
     }
-    this.refreshAutoPlay();
+    // this.refreshAutoPlay();
   }
 
   prev(): void {}

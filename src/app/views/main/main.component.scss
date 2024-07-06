@@ -21,42 +21,75 @@
   background-color: transparent;
 }
 .silder {
-  grid-area: 1 / 6 / span 12 / span 13;
+  &.sl-1 {
+    grid-area: 1 / 1 / span 12 / span 13;
+  }
+  &.sl-2 {
+    grid-area: 1 / 6 / span 12 / span 13;
+  }
+  @media (max-width: 775px) {
+    &.sl-1 {
+      grid-area: 1 / 1 / span 12 / span 18;
+    }
+    &.sl-2 {
+      grid-area: 1 / 1 / span 12 / span 18;
+    }
+  }
   background: transparent;
   // background-image: url("../../../assets/BG_img.png");
 
   background-repeat: no-repeat !important;
   background-size: auto 100% !important;
-  &.img-left {
-    background-position: left;
-  }
-  @media (max-width: 1700px) {
+  .image {
+    height: 100%;
     &.img-left {
-      background-position: right;
+      mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
     }
-  }
-  &.img-right {
-    background-position: right;
-  }
-  @media (max-width: 1700px) {
     &.img-right {
-      background-position: left;
+      mask-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+    @media (max-width: 1205px) {
+      &.img-left {
+        mask-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) 15%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+      &.img-right {
+        mask-image: linear-gradient(
+          to left,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) 15%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+    }
+
+    @media (max-width: 775px) {
+      &.img-left,
+      &.img-right {
+        mask-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.5) 0%,
+          rgba(0, 0, 0, 0.4) 15%,
+          rgba(0, 0, 0, 0.2) 80%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
     }
   }
-  // position: relative;
-  // .content {
-  //   grid-area: 4/2 / span 8 / span 5;
-  //   display: flex;
-  //   flex-direction: column;
-  //   .title {
-  //     margin-top: auto;
-  //   }
-  //   .descr {
-  //     margin-bottom: 30px;
-  //   }
-  //   .controls {
-  //   }
-  // }
 }
 .content {
   &.shedule-width-social {
