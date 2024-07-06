@@ -16,7 +16,7 @@
       <div class="separator"></div>
 
       <div class="navs">
-        <div class="nav-item active">
+        <div class="nav-item active" (click)="navigate(['main'])">
           <span>ГЛАВНАЯ</span>
           <img src="../assets/menu_active.svg" />
         </div>
@@ -113,11 +113,11 @@
         <div class="golden-grid">
           <div class="container-full">
             <div class="container-content">
-              <pre>
-                {{ curretnUser$ | async | json }}
-              </pre>
+              <ng-container *ngIf="curretnUser$ | async as currentUser">
+                <span>{{ currentUser.userInfo.name }}</span>
+              </ng-container>
               <div class="btn">
-                <app-button>
+                <app-button (onClick)="goToPersonalArea()">
                   <span>КАБИНЕТ</span>
                 </app-button>
               </div>

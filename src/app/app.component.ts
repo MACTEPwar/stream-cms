@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
@@ -31,6 +33,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.setVh();
+    this.authService.cheackAuth();
     // alert(window.innerHeight)
   }
 
@@ -53,6 +56,7 @@ export class AppComponent {
   signInHandle(): void {
     // this.isAuth = {};
     this.visibleSignIn$.next(false);
+    this.router.navigate(['login']);
   }
 
   signInGoogleHandle(): void {
@@ -75,5 +79,14 @@ export class AppComponent {
     this.visiblPersonalArea$.next(!this.visiblPersonalArea$.getValue());
 
     this.cdr.detectChanges();
+  }
+
+  goToPersonalArea(): void {
+    this.router.navigate(['personal-area']);
+    this.visiblPersonalArea$.next(false);
+  }
+
+  navigate(args: string[]): void {
+    this.router.navigate(args);
   }
 }

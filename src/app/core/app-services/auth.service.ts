@@ -39,6 +39,7 @@ export class AuthService {
     const hash: Nullable<string> = localStorage.getItem('auth');
     if (hash) {
       this.currentUserHash$.next(hash);
+      this.refreshUserInfo$().subscribe();
     }
   }
 
@@ -54,7 +55,8 @@ export class AuthService {
           this.rememberMe(hash);
         }
         this.currentUserHash$.next(hash);
-      })
+      }),
+      switchMap((sw) => this.refreshUserInfo$())
     );
   }
 
@@ -72,10 +74,7 @@ export class AuthService {
         }
         this.currentUserHash$.next(hash);
       }),
-      switchMap((sw) => this.authHttpService.getUserInfo$()),
-      tap((ui: any) => {
-        this.currentUser$.next(ui);
-      })
+      switchMap((sw) => this.refreshUserInfo$())
     );
   }
 
@@ -88,6 +87,14 @@ export class AuthService {
     this.currentUser$.next(null);
     localStorage.removeItem('auth');
     return of(true);
+  }
+
+  public refreshUserInfo$(): Observable<any> {
+    return this.authHttpService.getUserInfo$().pipe(
+      tap((ui: any) => {
+        this.currentUser$.next(ui);
+      })
+    );
   }
 
   private rememberMe(hash: string) {

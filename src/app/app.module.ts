@@ -13,9 +13,20 @@ import { DonatersService, SheduleService, AuthService } from '@app-services';
 import { AuthHttpService } from './core/requests/auth-http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.inteceptor';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
+import { PersonalAreaComponent } from './views/personal-area/personal-area.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    NotFoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    PersonalAreaComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +35,8 @@ import { AuthInterceptor } from './core/interceptors/auth.inteceptor';
     SButtonModule,
     HttpClientModule,
     RequestsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     ConfigService,

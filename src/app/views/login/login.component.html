@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Логин</h1>
+  <div
+    [formGroup]="loginForm"
+    style="display: flex; flex-direction: column; width: 400px"
+  >
+    <label for="login">Логин:</label>
+    <input formControlName="username" id="login" />
+    <label for="pass">Пароль:</label>
+    <input formControlName="password" id="password" type="password" />
+  </div>
+  <button (click)="login()">Войти</button>
+</div>
