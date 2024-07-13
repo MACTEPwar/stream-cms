@@ -9,7 +9,12 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SButtonModule } from './shared/components/s-button/s-button.module';
 import { ConfigService, RequestsModule } from '@core';
-import { DonatersService, SheduleService, AuthService } from '@app-services';
+import {
+  DonatersService,
+  SheduleService,
+  AuthService,
+  PlayerSocketService,
+} from '@app-services';
 import { AuthHttpService } from './core/requests/auth-http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.inteceptor';
@@ -52,6 +57,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     },
     AuthService,
     AuthHttpService,
+    PlayerSocketService,
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,

@@ -78,6 +78,10 @@ export class AuthService {
     );
   }
 
+  registration$(registrationForm: any): Observable<any> {
+    return this.authHttpService.registration$(registrationForm);
+  }
+
   getAuthResponse() {
     return this.auth2.currentUser.get().getAuthResponse();
   }

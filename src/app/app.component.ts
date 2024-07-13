@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
+import { PlayerSocketService } from '@app-services';
 
 @Component({
   selector: 'app-root',
@@ -25,10 +26,12 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private playerSocketService: PlayerSocketService
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
+    this.playerSocketService.onMessage();
   }
 
   ngOnInit(): void {
@@ -71,6 +74,7 @@ export class AppComponent {
   logOutHandle(): void {
     // this.isAuth = null;
     this.visiblPersonalArea$.next(false);
+    this.authService.logout$();
   }
 
   test() {

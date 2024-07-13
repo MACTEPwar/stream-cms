@@ -1,1 +1,17 @@
-<p>register works!</p>
+<div class="container">
+  <h1>Регистрация</h1>
+  <div
+    [formGroup]="registerForm"
+    style="display: flex; flex-direction: column; width: 400px"
+  >
+    <label for="name">Отображаемое имя:</label>
+    <input formControlName="name" id="name" />
+    <label for="login">Логин:</label>
+    <input formControlName="login" id="login" />
+    <label for="password">Пароль:</label>
+    <input formControlName="password" id="password" type="password" />
+    <label for="confirmPassword">Повторите пароль:</label>
+    <input formControlName="confirmPassword" id="confirmPassword" type="password" />
+  </div>
+  <button (click)="send()">Зарегистрироваться</button>
+</div>

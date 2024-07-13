@@ -20,6 +20,12 @@ export class AuthHttpService extends ABaseHttpService {
     super(configService);
   }
 
+  registration$(registrationForm: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${this.getApiURL()}/auth/registration`, registrationForm)
+      .pipe(take(1));
+  }
+
   login$(username: string, password: string): Observable<any> {
     return this.httpClient
       .post<any>(`${this.getApiURL()}/auth/login`, {
