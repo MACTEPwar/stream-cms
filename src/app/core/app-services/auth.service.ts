@@ -1,8 +1,9 @@
 import { Nullable } from '@models';
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import {
   BehaviorSubject,
   Observable,
+  filter,
   from,
   map,
   of,
@@ -14,6 +15,7 @@ import { gapi, loadGapiInsideDOM } from 'gapi-script';
 
 @Injectable()
 export class AuthService {
+  roles: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   currentUserHash$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<
     Nullable<string>
   >(null);
@@ -25,6 +27,21 @@ export class AuthService {
 
   constructor(private authHttpService: AuthHttpService) {
     this.initGoogleAuth();
+    // this.roles = this.currentUser$.pipe(
+    //   map((m) => {
+    //     m.roles.map((mm) => mm.key);
+    //   })
+    // );
+  }
+
+  userHasRole$(roleKey: string): Observable<boolean> {
+    return this.currentUser$.pipe(
+      filter((f) => f !== null),
+      map((m) => {
+        const roles: string[] = m.roles.map((mm: any) => mm.key);
+        return roles.includes(roleKey);
+      })
+    );
   }
 
   isAuthenticated(): boolean {
@@ -126,3 +143,5 @@ export class AuthService {
     });
   }
 }
+
+// export const ROLES_IT = new InjectionToken<string[]>('ROLES');

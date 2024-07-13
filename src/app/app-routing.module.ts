@@ -5,6 +5,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { PersonalAreaComponent } from './views/personal-area/personal-area.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainComponent,
+  },
+  {
+    path: 'admin-panel',
+    component: AdminPanelComponent,
   },
   {
     path: '**',

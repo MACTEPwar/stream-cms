@@ -14,6 +14,7 @@ import {
   SheduleService,
   AuthService,
   PlayerSocketService,
+  AdminService,
 } from '@app-services';
 import { AuthHttpService } from './core/requests/auth-http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -22,6 +23,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { PersonalAreaComponent } from './views/personal-area/personal-area.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     PersonalAreaComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     },
     AuthService,
     AuthHttpService,
+    AdminService,
     PlayerSocketService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -19,9 +19,9 @@ export class PlayerSocketService {
     this.socket.emit('message', message);
   }
 
-  public onMessage(): Observable<string> {
+  public onCommand(): Observable<any> {
     return new Observable<string>((observer) => {
-      this.socket.on('message', (data: string) => {
+      this.socket.on('command', (data: any) => {
         observer.next(data);
       });
     });

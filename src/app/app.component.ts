@@ -31,13 +31,18 @@ export class AppComponent {
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
-    this.playerSocketService.onMessage();
+    this.playerSocketService.onCommand();
   }
 
   ngOnInit(): void {
     this.setVh();
     this.authService.cheackAuth();
-    // alert(window.innerHeight)
+
+    if (this.authService.isAuthenticated()) {
+      this.playerSocketService.onCommand().subscribe((res) => {
+        alert('i have messge\n' + JSON.stringify(res, null, 4));
+      });
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -92,5 +97,7 @@ export class AppComponent {
 
   navigate(args: string[]): void {
     this.router.navigate(args);
+    this.visiblPersonalArea$.next(false);
+    this.visibleNavs$.next(false);
   }
 }

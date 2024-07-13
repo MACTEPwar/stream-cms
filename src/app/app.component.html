@@ -16,6 +16,14 @@
       <div class="separator"></div>
 
       <div class="navs">
+        <div
+          *hasRole="'ADMIN'"
+          class="nav-item"
+          (click)="navigate(['admin-panel'])"
+        >
+          <span>ADMIN</span>
+          <img src="../assets/menu_active.svg" />
+        </div>
         <div class="nav-item active" (click)="navigate(['main'])">
           <span>ГЛАВНАЯ</span>
           <img src="../assets/menu_active.svg" />
@@ -64,7 +72,15 @@
         <div class="golden-grid">
           <div class="container-full">
             <div class="container-content">
-              <div class="nav-item active">
+              <div
+                *hasRole="'ADMIN'"
+                class="nav-item"
+                (click)="navigate(['admin-panel'])"
+              >
+                <span>ADMIN</span>
+                <img src="../assets/menu_active.svg" />
+              </div>
+              <div class="nav-item active" (click)="navigate(['main'])">
                 <span>ГЛАВНАЯ</span>
                 <img src="../assets/menu_active.svg" />
               </div>
