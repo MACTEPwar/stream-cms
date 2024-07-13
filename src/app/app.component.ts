@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
@@ -31,18 +31,38 @@ export class AppComponent {
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
-    this.playerSocketService.onCommand();
+    // this.playerSocketService.onCommand();
   }
+
+  private commandSubscription: Subscription | null = null;
+  private currentUserSubscription: Subscription | null = null;
 
   ngOnInit(): void {
     this.setVh();
     this.authService.cheackAuth();
 
-    if (this.authService.isAuthenticated()) {
-      this.playerSocketService.onCommand().subscribe((res) => {
-        alert('i have messge\n' + JSON.stringify(res, null, 4));
+    // this.currentUserSubscription = this.authService.currentUser$.subscribe(
+    //   (currentUser) => {
+    //     if (currentUser) {
+    //       this.subscribeToCommand();
+    //     } else {
+    //       this.unsubscribeFromCommand();
+    //     }
+    //   }
+    // );
+
+    // if (this.authService.isAuthenticated()) {
+    //   this.subscribeToCommand();
+    // }
+    this.commandSubscription = this.playerSocketService
+      .onCommand()
+      .subscribe((res) => {
+        switch (res.code) {
+          case 0: {
+            this.proccessCommandInveiteToRoom(res.data);
+          }
+        }
       });
-    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -99,5 +119,42 @@ export class AppComponent {
     this.router.navigate(args);
     this.visiblPersonalArea$.next(false);
     this.visibleNavs$.next(false);
+  }
+
+  private proccessCommandInveiteToRoom(data: any): void {
+    const invite_to_room: boolean = JSON.parse(
+      this.authService.currentUser$
+        .getValue()
+        .settings.find((f: any) => f.key === 'invite_to_room').defaultValue
+    );
+    if (this.authService.isAuthenticated() && invite_to_room) {
+      alert('I have message\n' + JSON.stringify(data, null, 4));
+    }
+  }
+
+  // private subscribeToCommand(): void {
+  //   if (!this.commandSubscription) {
+  //     this.commandSubscription = this.playerSocketService
+  //       .onCommand()
+  //       .subscribe((res) => {
+  //         alert('I have message\n' + JSON.stringify(res, null, 4));
+  //       });
+  //   }
+  // }
+
+  // private unsubscribeFromCommand(): void {
+  //   if (this.commandSubscription) {
+  //     this.commandSubscription.unsubscribe();
+  //     this.commandSubscription = null;
+  //   }
+  // }
+
+  ngOnDestroy(): void {
+    // if (this.commandSubscription) {
+    //   this.commandSubscription.unsubscribe();
+    // }
+    // if (this.currentUserSubscription) {
+    //   this.currentUserSubscription.unsubscribe();
+    // }
   }
 }

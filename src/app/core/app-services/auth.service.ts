@@ -44,6 +44,15 @@ export class AuthService {
     );
   }
 
+  userHasRole(roleKey: string): boolean {
+    return (
+      this.currentUser$
+        .getValue()
+        ?.roles?.map((mm: any) => mm.key)
+        ?.includes(roleKey) ?? false
+    );
+  }
+
   isAuthenticated(): boolean {
     return this.currentUserHash$.getValue() !== null;
   }
