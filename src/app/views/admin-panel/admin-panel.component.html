@@ -1,2 +1,29 @@
 <h2>Комнаты</h2>
-<button (click)="sendConfirmationToAllUsers()">Собрать желающих</button>
+<button class="ml-4 mb-2" pButton pRipple (click)="createRoom()">Создать комнату</button>
+
+@for (room of (rooms$ |async); track room.id) {
+<p-card [header]="room.name.uk" [ngStyle]="{ margin: '10px' }" styleClass="mx-4">
+  <div class="my-2">
+    <button pButton pRipple (click)="sendConfirmationToAllUsers()">
+      Собрать желающих
+    </button>
+  </div>
+
+  <div class="my-2">
+    <button pButton pRipple (click)="sendConfirmationToAllUsers()">
+      Удалить комнату
+    </button>
+  </div>
+  <div class="my-2">
+    <button pButton pRipple (click)="sendConfirmationToAllUsers()">
+      Изменить настройки
+    </button>
+  </div>
+  <div class="my-2">
+    <button pButton pRipple (click)="sendConfirmationToAllUsers()">
+      Изменить сслыку
+    </button>
+  </div>
+</p-card>
+
+}

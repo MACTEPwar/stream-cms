@@ -15,6 +15,7 @@ import {
   AuthService,
   PlayerSocketService,
   AdminService,
+  RoomsService,
 } from '@app-services';
 import { AuthHttpService } from './core/requests/auth-http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,13 @@ import { RegisterComponent } from './views/register/register.component';
 import { PersonalAreaComponent } from './views/personal-area/personal-area.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+
+import { CardModule } from 'primeng/card';
+
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -41,15 +49,22 @@ import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
     SharedModule,
     BrowserAnimationsModule,
     SButtonModule,
+    ButtonModule,
     HttpClientModule,
     RequestsModule,
     FormsModule,
     ReactiveFormsModule,
+    ConfirmDialogModule,
+    ToastModule,
+    CardModule,
   ],
   providers: [
     ConfigService,
     SheduleService,
     DonatersService,
+    ConfirmationService,
+    MessageService,
+    RoomsService,
     {
       provide: APP_INITIALIZER,
       useFactory: (configService: ConfigService) => {

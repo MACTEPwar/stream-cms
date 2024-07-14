@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
 
 @Injectable()
@@ -19,12 +19,15 @@ export class PlayerSocketService {
     this.socket.emit('message', message);
   }
 
-  public onCommand(): Observable<any> {
+  public onCommand(commanCode: number): Observable<any> {
     return new Observable<string>((observer) => {
       this.socket.on('command', (data: any) => {
         observer.next(data);
       });
-    });
+    }).pipe(
+      filter((f: any) => f.code === commanCode),
+      map((m) => m.data)
+    );
   }
 
   public onConnect(): Observable<void> {

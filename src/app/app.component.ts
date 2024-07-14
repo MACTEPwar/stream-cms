@@ -4,6 +4,7 @@ import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
 import { PlayerSocketService } from '@app-services';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,9 @@ export class AppComponent {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private playerSocketService: PlayerSocketService
+    private playerSocketService: PlayerSocketService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
@@ -55,13 +58,9 @@ export class AppComponent {
     //   this.subscribeToCommand();
     // }
     this.commandSubscription = this.playerSocketService
-      .onCommand()
+      .onCommand(0)
       .subscribe((res) => {
-        switch (res.code) {
-          case 0: {
-            this.proccessCommandInveiteToRoom(res.data);
-          }
-        }
+        this.proccessCommandInveiteToRoom(res.data);
       });
   }
 
@@ -128,7 +127,19 @@ export class AppComponent {
         .settings.find((f: any) => f.key === 'invite_to_room').defaultValue
     );
     if (this.authService.isAuthenticated() && invite_to_room) {
-      alert('I have message\n' + JSON.stringify(data, null, 4));
+      // alert('I have message\n' + JSON.stringify(data, null, 4));
+      this.confirmationService.confirm({
+        header: 'Инфо',
+        message: 'Вы желаете учавствать в кастомке?',
+        accept: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Инфо',
+            detail: 'Вы были добавлены в список на отбор в лобби.',
+          });
+        },
+        reject: () => {},
+      });
     }
   }
 
