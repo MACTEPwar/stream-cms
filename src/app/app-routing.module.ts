@@ -30,7 +30,10 @@ const routes: Routes = [
   },
   {
     path: 'admin-panel',
-    component: AdminPanelComponent,
+    loadChildren: () =>
+      import('./views/admin-panel/admin-panel.module').then(
+        (m) => m.AdminPanelModule
+      ),
   },
   {
     path: '**',

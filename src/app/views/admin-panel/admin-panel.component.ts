@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService, RoomsService } from '@app-services';
 import { Observable } from 'rxjs';
 
@@ -8,29 +9,33 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent implements OnInit {
-  rooms$: Observable<any[]>;
+ 
   constructor(
     private adminService: AdminService,
-    private roomsService: RoomsService
+    private router: Router
   ) {
-    this.rooms$ = this.roomsService.data$;
+   
   }
 
   ngOnInit(): void {
-    this.roomsService.refreshData();
+    
   }
 
   createRoom(): void {
     const rand = new Date().getTime();
-    this.roomsService.create({
-      name: {
-        uk: `Кiмната ${rand}`,
-        ru: `Комната ${rand}`,
-      },
-    });
+    // this.roomsService.create({
+    //   name: {
+    //     uk: `Кiмната ${rand}`,
+    //     ru: `Комната ${rand}`,
+    //   },
+    // });
   }
 
   sendConfirmationToAllUsers(): void {
     this.adminService.sendConfirmationToAllUsers();
+  }
+
+  navigate(commands: any[]): void {
+    this.router.navigate(commands);
   }
 }

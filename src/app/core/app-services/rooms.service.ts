@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { RoomsHttpService } from '../requests/rooms-http.service';
 
 @Injectable()
@@ -18,6 +18,10 @@ export class RoomsService {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  getActiveRooms$(): Observable<any> {
+    return this.data$;
   }
 
   create(model: { name: any }): void {
