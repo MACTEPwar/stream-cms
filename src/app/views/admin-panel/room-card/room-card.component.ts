@@ -9,6 +9,7 @@ import {
   RoomService,
   RoomsService,
 } from '@app-services';
+import { MenuItem } from 'primeng/api';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { RoomsHttpService } from 'src/app/core/requests/rooms-http.service';
 
@@ -25,6 +26,24 @@ export class RoomCardComponent {
   untilSubsFlag$: Subject<void> = new Subject<void>();
 
   userOptions = [];
+  roomOptions: MenuItem[] = [
+    {
+      label: 'Собрать желающих',
+      command: () => {
+        this.sendConfirmationToAllUsers();
+      },
+    },
+    {
+      label: 'Запустить рандомайзер',
+      command: () => {},
+    },
+    {
+      label: 'Очитстиь комнату',
+      command: () => {
+        this.roomService.clear$().subscribe();
+      },
+    },
+  ];
 
   constructor(
     private roomService: RoomService,
@@ -64,8 +83,9 @@ export class RoomCardComponent {
       .pipe(takeUntil(this.untilSubsFlag$))
       .subscribe({
         next: (res) => {
-          console.log('InvitedUser', res);
-          alert(123);
+          // console.log('InvitedUser', res);
+          // alert(JSON.stringify(res.user, null, 4));
+          this.roomService.inviteUser(res.user);
         },
         error: (err) => {
           console.warn(err);

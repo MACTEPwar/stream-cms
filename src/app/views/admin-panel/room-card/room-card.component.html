@@ -9,16 +9,30 @@
 </div>
 } @else {
 <ng-container *ngIf="room$ | async as room">
-  <div class="px-5">
+  <div class="px-5 pt-2">
     <div class="ml-1 flex justify-content-between">
       <h3 class="text-white">Комната {{ room.name.uk }}</h3>
       <div>
-        <p-button
-          label="Собрать желающих"
-          styleClass="mr-2"
-          (onClick)="sendConfirmationToAllUsers()"
-        />
-        <p-button label="Запустить рандомайзер" />
+        <button
+          pbutton=""
+          pripple=""
+          label="View"
+          icon="pi pi-ellipsis-v"
+          class="p-element p-ripple p-button-outlined p-button-secondary p-button p-component px-2"
+          (click)="m2.toggle($event)"
+        >
+          <span
+            class="p-button-icon p-button-icon-left pi pi-ellipsis-v m-0"
+            aria-hidden="true"
+          ></span>
+        </button>
+
+        <p-menu
+          [popup]="true"
+          [model]="roomOptions"
+          appendTo="body"
+          #m2
+        ></p-menu>
       </div>
     </div>
     <div class="grid mt-2">

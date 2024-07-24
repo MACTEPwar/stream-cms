@@ -136,14 +136,24 @@ export class AppComponent {
           this.roomsService
             .inviteUserToRoom(data.roomId)
             .pipe(take(1))
-            .subscribe();
-          alert(JSON.stringify(data, null, 4));
-
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Инфо',
-            detail: 'Вы были добавлены в список на отбор в лобби.',
-          });
+            .subscribe({
+              next: () => {
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Инфо',
+                  detail: 'Вы были добавлены в список на отбор в лобби.',
+                });
+              },
+              error: (err) => {
+                console.log('ERR', err);
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Ошибка',
+                  detail: err.error.message,
+                });
+              },
+            });
+          // alert(JSON.stringify(data, null, 4));
         },
         reject: () => {},
       });

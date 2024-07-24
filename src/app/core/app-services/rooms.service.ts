@@ -36,4 +36,8 @@ export class RoomsService {
   inviteUserToRoom(roomId: string): Observable<any> {
     return this.roomsHttpService.inviteUserToRoom$(roomId);
   }
+
+  clear$(roomId: string): Observable<any> {
+    return this.roomsHttpService.clear$(roomId);
+  }
 }

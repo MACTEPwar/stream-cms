@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, retry, tap } from 'rxjs';
+import { BehaviorSubject, Observable, retry, switchMap, tap } from 'rxjs';
 import { RoomsHttpService } from '../requests/rooms-http.service';
 import { UsersHttpService } from '../requests/users-http.service';
 
@@ -29,6 +29,10 @@ export class RoomService {
         },
       })
     );
+  }
+
+  inviteUser(user: any): void {
+    this.users$.next([...this.users$.getValue(), user]);
   }
 
   loadUsers$(): Observable<any> {
@@ -64,5 +68,11 @@ export class RoomService {
           },
         })
       );
+  }
+
+  clear$(): Observable<any> {
+    return this.roomsHttpService
+      .clear$(this.roomId)
+      .pipe(switchMap((sw) => this.loadUsers$()));
   }
 }

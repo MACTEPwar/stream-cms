@@ -38,4 +38,10 @@ export class RoomsHttpService extends ABaseHttpService {
       })
       .pipe(take(1));
   }
+
+  clear$(roomId: string): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${this.getApiURL()}/rooms/clear/${roomId}`)
+      .pipe(take(1));
+  }
 }
