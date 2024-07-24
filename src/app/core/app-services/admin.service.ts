@@ -5,7 +5,7 @@ import { AdminHttpService } from '../requests/admin-http.service';
 export class AdminService {
   constructor(private adminHttpService: AdminHttpService) {}
 
-  sendConfirmationToAllUsers(): void {
-    this.adminHttpService.sendConfirmationToAllUsers$().subscribe();
+  sendConfirmationInviteToRoom(roomId: string): void {
+    this.adminHttpService.sendConfirmationInviteToRoom$(roomId).subscribe();
   }
 }

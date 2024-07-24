@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { RoomsService } from '@app-services';
+import {
+  BreadcrumbBuilder,
+  BreadcrumbService,
+  EBreadcrumb,
+  RoomsService,
+} from '@app-services';
 import { MenuItem } from 'primeng/api';
 import { Observable } from 'rxjs';
 
@@ -12,7 +17,10 @@ export class RoomsComponent {
   rooms$: Observable<any[]>;
   itemOptions: MenuItem[] | undefined;
 
-  constructor(private roomsService: RoomsService) {
+  constructor(
+    private roomsService: RoomsService,
+    private breadcrumbService: BreadcrumbService
+  ) {
     this.rooms$ = this.roomsService.data$;
   }
 
@@ -22,8 +30,16 @@ export class RoomsComponent {
     this.itemOptions = [
       {
         label: 'Переглянути',
-        icon: 'pi pi-eye'
+        icon: 'pi pi-eye',
       },
     ];
+
+    this.breadcrumbService.setItems(
+      new BreadcrumbBuilder()
+        .newBreadcrumb()
+        .addBreadcrumb(EBreadcrumb.HOME)
+        .addBreadcrumb(EBreadcrumb.ROOMS)
+        .apply()
+    );
   }
 }

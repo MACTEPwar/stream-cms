@@ -5,3 +5,5 @@ export * from './auth.service';
 export * from './player-socket.service';
 export * from './admin.service';
 export * from './rooms.service';
+export * from './breadcrumb.service';
+export * from './room.service';

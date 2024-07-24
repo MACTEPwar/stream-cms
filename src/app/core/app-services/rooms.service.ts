@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { RoomsHttpService } from '../requests/rooms-http.service';
 
 @Injectable()
@@ -31,5 +31,9 @@ export class RoomsService {
       },
       error: (err) => {},
     });
+  }
+
+  inviteUserToRoom(roomId: string): Observable<any> {
+    return this.roomsHttpService.inviteUserToRoom$(roomId);
   }
 }

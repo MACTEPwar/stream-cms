@@ -3,6 +3,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { AdminPanelComponent } from './admin-panel.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { RoomCardComponent } from './room-card/room-card.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'rooms',
         component: RoomsComponent,
+      },
+      {
+        path: 'rooms/:id',
+        component: RoomCardComponent,
       },
     ],
   },

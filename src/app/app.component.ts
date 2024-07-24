@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
-import { PlayerSocketService } from '@app-services';
+import { PlayerSocketService, RoomsService } from '@app-services';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -30,7 +30,8 @@ export class AppComponent {
     private router: Router,
     private playerSocketService: PlayerSocketService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private roomsService: RoomsService
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
@@ -60,7 +61,7 @@ export class AppComponent {
     this.commandSubscription = this.playerSocketService
       .onCommand(0)
       .subscribe((res) => {
-        this.proccessCommandInveiteToRoom(res.data);
+        this.proccessCommandInveiteToRoom(res);
       });
   }
 
@@ -132,6 +133,12 @@ export class AppComponent {
         header: 'Инфо',
         message: 'Вы желаете учавствать в кастомке?',
         accept: () => {
+          this.roomsService
+            .inviteUserToRoom(data.roomId)
+            .pipe(take(1))
+            .subscribe();
+          alert(JSON.stringify(data, null, 4));
+
           this.messageService.add({
             severity: 'success',
             summary: 'Инфо',
@@ -143,29 +150,5 @@ export class AppComponent {
     }
   }
 
-  // private subscribeToCommand(): void {
-  //   if (!this.commandSubscription) {
-  //     this.commandSubscription = this.playerSocketService
-  //       .onCommand()
-  //       .subscribe((res) => {
-  //         alert('I have message\n' + JSON.stringify(res, null, 4));
-  //       });
-  //   }
-  // }
-
-  // private unsubscribeFromCommand(): void {
-  //   if (this.commandSubscription) {
-  //     this.commandSubscription.unsubscribe();
-  //     this.commandSubscription = null;
-  //   }
-  // }
-
-  ngOnDestroy(): void {
-    // if (this.commandSubscription) {
-    //   this.commandSubscription.unsubscribe();
-    // }
-    // if (this.currentUserSubscription) {
-    //   this.currentUserSubscription.unsubscribe();
-    // }
-  }
+  ngOnDestroy(): void {}
 }

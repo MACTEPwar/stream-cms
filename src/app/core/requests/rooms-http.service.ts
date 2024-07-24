@@ -30,4 +30,12 @@ export class RoomsHttpService extends ABaseHttpService {
       .put<any>(`${this.getApiURL()}/rooms/create`, model)
       .pipe(take(1));
   }
+
+  inviteUserToRoom$(roomId: string): Observable<any> {
+    return this.httpClient
+      .post<any>(`${this.getApiURL()}/rooms/addUserToRoom`, {
+        roomId,
+      })
+      .pipe(take(1));
+  }
 }

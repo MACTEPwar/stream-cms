@@ -24,7 +24,6 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { PersonalAreaComponent } from './views/personal-area/personal-area.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -41,7 +40,6 @@ import { ButtonModule } from 'primeng/button';
     LoginComponent,
     RegisterComponent,
     PersonalAreaComponent,
-    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -52,30 +52,33 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateWidth();
+
+    setTimeout(() => {
+      // this.updateWidth();
+    }, 300);
   }
 
   private observeElement(element: HTMLElement) {
     const observer = new MutationObserver(() => {
-      const display = window.getComputedStyle(element).display;
-      if (display === 'block') {
-        this.updateWidth();
-      }
+      this.updateWidth();
     });
 
     observer.observe(element, {
       attributes: true,
-      attributeFilter: ['style', 'class'],
+      childList: true,
+      subtree: true,
+      characterData: true,
     });
 
     this.observers.push(observer);
   }
 
   updateWidth(): void {
-    console.log(
-      'Parent',
-      this.el.nativeElement.parentNode,
-      this.el.nativeElement.parentNode.getBoundingClientRect().width
-    );
+    // console.log(
+    //   'Parent',
+    //   this.el.nativeElement.parentNode,
+    //   this.el.nativeElement.parentNode.getBoundingClientRect()
+    // );
     this.parentWidth =
       this.el.nativeElement.parentNode.getBoundingClientRect().width;
 

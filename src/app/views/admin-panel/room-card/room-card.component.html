@@ -1,0 +1,67 @@
+@if(preloader) {
+<div
+  class="absolute w-full bg-black-alpha-50 z-2"
+  style="height: calc(100% - 54px)"
+>
+  <div class="flex align-items-center justify-content-center w-full h-full">
+    <div class="loader"></div>
+  </div>
+</div>
+} @else {
+<ng-container *ngIf="room$ | async as room">
+  <div class="px-5">
+    <div class="ml-1 flex justify-content-between">
+      <h3 class="text-white">Комната {{ room.name.uk }}</h3>
+      <div>
+        <p-button
+          label="Собрать желающих"
+          styleClass="mr-2"
+          (onClick)="sendConfirmationToAllUsers()"
+        />
+        <p-button label="Запустить рандомайзер" />
+      </div>
+    </div>
+    <div class="grid mt-2">
+      @for (user of (users$ | async); track $index) {
+      <div class="col-12 lg:col-6 xl:col-3">
+        <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+          <div class="flex justify-content-between mb-3">
+            <div>
+              <span class="block text-500 font-medium mb-3"
+                >Користувач {{ $index + 1 }}</span
+              >
+              <div class="text-900 font-medium text-xl">
+                {{ user.userInfo.name }}
+              </div>
+            </div>
+            <div class="flex align-items-center justify-content-center">
+              <button
+                pbutton=""
+                pripple=""
+                icon="pi pi-ellipsis-v"
+                class="p-element p-ripple p-button-text p-button-plain p-button-rounded p-button p-component p-button-icon-only"
+                (click)="m.toggle($event)"
+              >
+                <span
+                  class="p-button-icon pi pi-ellipsis-v"
+                  aria-hidden="true"
+                ></span
+                ><span
+                  class="p-ink"
+                  style="height: 48px; width: 48px; top: 1px; left: -1px"
+                ></span>
+              </button>
+              <p-menu
+                [popup]="true"
+                [model]="userOptions"
+                appendTo="body"
+                #m
+              ></p-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div> </ng-container
+>}

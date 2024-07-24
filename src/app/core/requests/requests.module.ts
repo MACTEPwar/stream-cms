@@ -4,6 +4,7 @@ import { AdminHttpService } from './admin-http.service';
 import { DonatersHttpService } from './donaters-http.service';
 import { ScheduleHttpService } from './schedule-http.service';
 import { RoomsHttpService } from './rooms-http.service';
+import { UsersHttpService } from './users-http.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -12,6 +13,7 @@ import { RoomsHttpService } from './rooms-http.service';
     DonatersHttpService,
     AdminHttpService,
     RoomsHttpService,
+    UsersHttpService,
   ],
 })
 export class RequestsModule {}

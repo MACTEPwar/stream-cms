@@ -72,6 +72,76 @@
     </div>
   </div>
   <div class="flex flex-column relative flex-auto">
+    <p-breadcrumb
+      class="max-w-full surface-card flex font-medium overflow-y-hidden overflow-x-auto"
+      [model]="(items$ | async) ?? []"
+      styleClass="p-0 border-none"
+    >
+      <ng-template pTemplate="item" let-item>
+        <li class="relative p-3" *ngIf="item.url; else noUrl">
+          <div
+            *ngIf="item.url !== 'dashboard'"
+            class="absolute left-0 top-0 z-1"
+            style="
+              border-left: 20px solid var(--surface-card);
+              border-top: 26px solid transparent;
+              border-bottom: 26px solid transparent;
+              width: 0;
+              height: 0;
+            "
+          ></div>
+          <a
+            class="cursor-pointer text-blue-500 pl-4 white-space-nowrap"
+            [routerLink]="item.url"
+          >
+            <i [class]="item.icon"></i> {{ item.label }}
+          </a>
+          <div
+            *ngIf="item.url !== 'dashboard'"
+            class="absolute top-0"
+            style="
+              left: 1px;
+              border-left: 20px solid var(--surface-border);
+              border-top: 26px solid transparent;
+              border-bottom: 26px solid transparent;
+              width: 0;
+              height: 0;
+            "
+          ></div>
+        </li>
+        <ng-template #noUrl>
+          <li class="relative p-3">
+            <div
+              class="absolute left-0 top-0 z-1"
+              style="
+                border-left: 20px solid var(--surface-card);
+                border-top: 26px solid transparent;
+                border-bottom: 26px solid transparent;
+                width: 0;
+                height: 0;
+              "
+            ></div>
+            <span class="text-900 pl-4 white-space-nowrap">{{
+              item.label
+            }}</span>
+            <div
+              class="absolute top-0"
+              style="
+                left: 1px;
+                border-left: 20px solid var(--surface-border);
+                border-top: 26px solid transparent;
+                border-bottom: 26px solid transparent;
+                width: 0;
+                height: 0;
+              "
+            ></div>
+          </li>
+        </ng-template>
+      </ng-template>
+      <ng-template pTemplate="separator">
+        <li class="relative p-3"></li>
+      </ng-template>
+    </p-breadcrumb>
     <router-outlet></router-outlet>
   </div>
 </div>
