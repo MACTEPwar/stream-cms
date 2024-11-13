@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, filter, map } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
+import { ConfigService } from '@core';
 
 @Injectable()
 export class PlayerSocketService {
   private socket: Socket;
 
-  constructor() {
-    this.socket = io('http://localhost:3000');
+  constructor(private configService: ConfigService) {
+    const url = this.configService.getValue<string>('config', 'apiURL')!;
+    this.socket = io(url);
     this.onConnect().subscribe((res) => {
       console.log('connect to socket server');
     });

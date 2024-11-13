@@ -1,4 +1,4 @@
 {
-  "apiURL1": "http://192.168.0.104:3000",
-  "apiURL": "http://localhost:3000"
+  "apiURL": "http://192.168.0.107:3000",
+  "apiURL1": "http://localhost:3000"
 }

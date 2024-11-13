@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">stream-cms</string>
+    <string name="title_activity_main">stream-cms</string>
+    <string name="package_name">com.streamcms.app</string>
+    <string name="custom_url_scheme">com.streamcms.app</string>
+</resources>
