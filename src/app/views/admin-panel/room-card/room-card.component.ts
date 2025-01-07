@@ -35,7 +35,9 @@ export class RoomCardComponent {
     },
     {
       label: 'Запустить рандомайзер',
-      command: () => {},
+      command: () => {
+        this.roomService.choosePlayers$({ playerCount: 2 }).subscribe();
+      },
     },
     {
       label: 'Очитстиь комнату',

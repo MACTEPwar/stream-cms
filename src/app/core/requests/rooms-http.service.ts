@@ -13,9 +13,9 @@ export class RoomsHttpService extends ABaseHttpService {
     super(configService);
   }
 
-  getList$(): Observable<any> {
+  getList$(where: any = {}, include: any = {}): Observable<any> {
     return this.httpClient
-      .post<any>(`${this.getApiURL()}/rooms`, {})
+      .post<any>(`${this.getApiURL()}/rooms`, { where, include })
       .pipe(take(1));
   }
 
@@ -42,6 +42,12 @@ export class RoomsHttpService extends ABaseHttpService {
   clear$(roomId: string): Observable<any> {
     return this.httpClient
       .delete<any>(`${this.getApiURL()}/rooms/clear/${roomId}`)
+      .pipe(take(1));
+  }
+
+  choosePlayers$(roomId: string, options: any): Observable<any> {
+    return this.httpClient
+      .post<any>(`${this.getApiURL()}/rooms/choosePlayers/${roomId}`, options)
       .pipe(take(1));
   }
 }

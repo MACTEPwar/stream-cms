@@ -119,7 +119,15 @@ export class AuthService {
     return of(true);
   }
 
+  getUserSetting(key: string): any {
+    return JSON.parse(
+      this.currentUser$.getValue().settings.find((f: any) => f.key === key)
+        .defaultValue
+    );
+  }
+
   public refreshUserInfo$(): Observable<any> {
+    console.log('USER REFERSH')
     return this.authHttpService.getUserInfo$().pipe(
       tap((ui: any) => {
         this.currentUser$.next(ui);

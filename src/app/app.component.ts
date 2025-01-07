@@ -1,5 +1,13 @@
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  filter,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
@@ -63,6 +71,35 @@ export class AppComponent {
       .subscribe((res) => {
         this.proccessCommandInveiteToRoom(res);
       });
+
+    this.authService.currentUser$
+      .pipe(
+        tap((t) => {
+          console.log('USER', t);
+        }),
+        filter(
+          (f) => f !== null && this.authService.getUserSetting('invite_to_room')
+        ),
+        switchMap((user) => this.playerSocketService.onCommand(2))
+      )
+      .subscribe((res) => {
+        // alert(123);
+        if (
+          res.randomUsers.includes(this.authService.currentUser$.getValue().id)
+        ) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Инфо',
+            detail: 'Вас выбрал рандомайзер.',
+          });
+        } else {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Инфо',
+            detail: 'Ты в пролете.',
+          });
+        }
+      });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -122,11 +159,8 @@ export class AppComponent {
   }
 
   private proccessCommandInveiteToRoom(data: any): void {
-    const invite_to_room: boolean = JSON.parse(
-      this.authService.currentUser$
-        .getValue()
-        .settings.find((f: any) => f.key === 'invite_to_room').defaultValue
-    );
+    const invite_to_room: boolean =
+      this.authService.getUserSetting('invite_to_room');
     if (this.authService.isAuthenticated() && invite_to_room) {
       // alert('I have message\n' + JSON.stringify(data, null, 4));
       this.confirmationService.confirm({
@@ -158,6 +192,20 @@ export class AppComponent {
         reject: () => {},
       });
     }
+  }
+
+  createRoom(): void {
+    const rand = new Date().getTime();
+    this.roomsService
+      .create$({
+        name: {
+          uk: `Кiмната ${rand}`,
+          ru: `Комната ${rand}`,
+        },
+      })
+      .subscribe((res) => {
+        this.router.navigate(['/admin-panel/rooms', res.id]);
+      });
   }
 
   ngOnDestroy(): void {}

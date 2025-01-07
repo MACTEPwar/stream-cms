@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { RoomsHttpService } from '../requests/rooms-http.service';
 
 @Injectable()
@@ -24,13 +24,12 @@ export class RoomsService {
     return this.data$;
   }
 
-  create(model: { name: any }): void {
-    this.roomsHttpService.create$(model).subscribe({
-      next: (res) => {
+  create$(model: { name: any }): Observable<any> {
+    return this.roomsHttpService.create$(model).pipe(
+      tap(() => {
         this.refreshData();
-      },
-      error: (err) => {},
-    });
+      })
+    );
   }
 
   inviteUserToRoom(roomId: string): Observable<any> {

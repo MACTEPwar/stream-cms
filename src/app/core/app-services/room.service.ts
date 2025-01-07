@@ -36,43 +36,71 @@ export class RoomService {
   }
 
   loadUsers$(): Observable<any> {
-    return this.usersHttpService
+    return this.roomsHttpService
       .getList$(
         {
-          rooms: {
-            some: {
-              id: this.roomId,
-            },
-          },
+          id: this.roomId,
         },
         {
-          userInfo: {
+          users: {
             include: {
-              bindings: true,
+              user: {
+                include: {
+                  userInfo: true
+                }
+              }
             },
           },
-          roles: true,
-          accounts: true,
-          userSettings: {
-            include: {
-              setting: true,
-            },
-          },
-          settings: true,
         }
       )
       .pipe(
         tap({
-          next: (users) => {
-            this.users$.next(users);
+          next: (rooms) => {
+            this.users$.next(rooms[0]?.users?.map((m: any) => m.user) ?? []);
           },
         })
       );
+    // return this.usersHttpService
+    //   .getList$(
+    //     {
+    //       rooms: {
+    //         some: {
+    //           id: this.roomId,
+    //         },
+    //       },
+    //     },
+    //     {
+    //       userInfo: {
+    //         include: {
+    //           bindings: true,
+    //         },
+    //       },
+    //       roles: true,
+    //       accounts: true,
+    //       userSettings: {
+    //         include: {
+    //           setting: true,
+    //         },
+    //       },
+    //       settings: true,
+    //     }
+    //   )
+    //   .pipe(
+    //     tap({
+    //       next: (users) => {
+    //         this.users$.next(users);
+    //       },
+    //     })
+    //   );
   }
 
   clear$(): Observable<any> {
     return this.roomsHttpService
       .clear$(this.roomId)
       .pipe(switchMap((sw) => this.loadUsers$()));
+  }
+
+  choosePlayers$(options: any): Observable<any> {
+    return this.roomsHttpService.choosePlayers$(this.roomId, options);
   }
 }
