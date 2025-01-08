@@ -13,6 +13,7 @@ import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
 import { PlayerSocketService, RoomsService } from '@app-services';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { SocketMesssageCode } from '@models';
 
 @Component({
   selector: 'app-root',
@@ -67,7 +68,7 @@ export class AppComponent {
     //   this.subscribeToCommand();
     // }
     this.commandSubscription = this.playerSocketService
-      .onCommand(0)
+      .onCommand(SocketMesssageCode.Room.InviteUsersToRoom.code)
       .subscribe((res) => {
         this.proccessCommandInveiteToRoom(res);
       });
@@ -80,7 +81,11 @@ export class AppComponent {
         filter(
           (f) => f !== null && this.authService.getUserSetting('invite_to_room')
         ),
-        switchMap((user) => this.playerSocketService.onCommand(2))
+        switchMap((user) =>
+          this.playerSocketService.onCommand(
+            SocketMesssageCode.Room.ChoosePlayersReady.code
+          )
+        )
       )
       .subscribe((res) => {
         // alert(123);

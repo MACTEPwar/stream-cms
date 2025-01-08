@@ -9,6 +9,7 @@ import {
   RoomService,
   RoomsService,
 } from '@app-services';
+import { SocketMesssageCode } from '@models';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { RoomsHttpService } from 'src/app/core/requests/rooms-http.service';
@@ -81,7 +82,7 @@ export class RoomCardComponent {
       });
 
     this.playerSocketService
-      .onCommand(1)
+      .onCommand(SocketMesssageCode.Room.InvitedUserToRoom.code)
       .pipe(takeUntil(this.untilSubsFlag$))
       .subscribe({
         next: (res) => {
