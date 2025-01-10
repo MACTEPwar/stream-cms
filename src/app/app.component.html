@@ -125,7 +125,7 @@
         </div>
       </div>
 
-      <div class="navs-mob" [ngClass]="{ show: visiblPersonalArea$ | async }">
+      <div class="navs-mob show" *ngIf="visiblPersonalArea$ | async">
         <div class="golden-grid">
           <div class="container-full">
             <div class="container-content">

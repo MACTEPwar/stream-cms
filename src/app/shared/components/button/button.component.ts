@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -13,6 +14,8 @@ import {
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
+  @Input() debug: boolean = false;
+  @Input() width: number | null = null;
   @Output() onClick: EventEmitter<void> = new EventEmitter<void>();
 
   @HostListener('window:resize', ['$event'])
@@ -53,24 +56,22 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
     this.updateWidth();
 
-    setTimeout(() => {
-      // this.updateWidth();
-    }, 300);
+    // setTimeout(() => {
+    //   // this.updateWidth();
+    // }, 300);
   }
 
   private observeElement(element: HTMLElement) {
-    const observer = new MutationObserver(() => {
-      this.updateWidth();
-    });
-
-    observer.observe(element, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
-
-    this.observers.push(observer);
+    // const observer = new MutationObserver(() => {
+    //   this.updateWidth();
+    // });
+    // observer.observe(element, {
+    //   attributes: true,
+    //   childList: true,
+    //   subtree: true,
+    //   characterData: true,
+    // });
+    // this.observers.push(observer);
   }
 
   updateWidth(): void {
@@ -80,7 +81,12 @@ export class ButtonComponent implements OnInit {
     //   this.el.nativeElement.parentNode.getBoundingClientRect()
     // );
     this.parentWidth =
+      this.width ??
       this.el.nativeElement.parentNode.getBoundingClientRect().width;
+
+    if (this.debug) {
+      console.log('this.parentWidth ', this.parentWidth);
+    }
 
     this.offsetLayer1 = this.parentWidth - this.staticWidthLayer1;
     this.offsetLayer2 = this.parentWidth - this.staticWidthLayer2;

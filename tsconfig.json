@@ -18,20 +18,12 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "paths": {
-      "@models": [
-        "src/app/models"
-      ],
-      "@core": [
-        "src/app/core"
-      ],
-      "@app-services": [
-        "src/app/core/app-services"
-      ]
+      "@models": ["src/app/models"],
+      "@core": ["src/app/core"],
+      "@app-services": ["src/app/core/app-services"],
+      "@partial-views": ["src/app/shared/partial-views"]
     },
     "useDefineForClassFields": false
   },

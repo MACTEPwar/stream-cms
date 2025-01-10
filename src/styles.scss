@@ -64,3 +64,12 @@ body {
 .d-none {
   display: none;
 }
+
+p-dropdown {
+  .p-component {
+    height: 40px;
+    .p-inputtext {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+}

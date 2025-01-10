@@ -1,0 +1,68 @@
+<ng-container [formGroup]="profileForm">
+  <div class="formgrid grid" formGroupName="name">
+    <div class="field col">
+      <label for="uk">Назва (uk)</label>
+      <input
+        pInputText
+        formControlName="uk"
+        id="uk"
+        type="text"
+        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+      />
+    </div>
+    <div class="field col">
+      <label for="ru">Назва (ru)</label>
+      <input
+        pInputText
+        formControlName="ru"
+        id="ru"
+        type="text"
+        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+      />
+    </div>
+  </div>
+  <div class="formgrid grid" formGroupName="settings">
+    <div class="field col">
+      <label for="needRandomPlayers">Кiлькiсть гравцiв</label>
+      <p-inputNumber
+        inputId="needRandomPlayers"
+        formControlName="needRandomPlayers"
+        inputStyleClass="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        styleClass="w-full"
+        [attr.class]="'w-full'"
+      />
+    </div>
+    <div class="field col">
+      <label for="inviteMode">Тип запрошення</label>
+      <p-dropdown
+        appendTo="body"
+        [options]="inviteModeOptions"
+        id="inviteMode"
+        formControlName="inviteMode"
+        optionLabel="label"
+        optionValue="value"
+        styleClass="w-full"
+      />
+    </div>
+  </div>
+  <div class="formgrid grid">
+    <div class="field col mb-0 flex">
+      <button
+        pButton
+        pRipple
+        label="Вiдмiна"
+        class="p-button-danger mr-auto w-11rem"
+        (click)="close()"
+      ></button>
+    </div>
+    <div class="field col mb-0 flex">
+      <button
+        pButton
+        pRipple
+        label="Створити"
+        class="p-button-success ml-auto w-11rem"
+        (click)="create()"
+      ></button>
+    </div>
+  </div>
+</ng-container>

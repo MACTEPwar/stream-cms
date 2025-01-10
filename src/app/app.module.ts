@@ -27,9 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
 import { CardModule } from 'primeng/card';
-
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 
 @NgModule({
@@ -56,6 +55,7 @@ import { ButtonModule } from 'primeng/button';
     ToastModule,
     CardModule,
     QueryModule,
+    DynamicDialogModule,
   ],
   providers: [
     ConfigService,
@@ -64,6 +64,7 @@ import { ButtonModule } from 'primeng/button';
     ConfirmationService,
     MessageService,
     RoomsService,
+    DialogService,
     {
       provide: APP_INITIALIZER,
       useFactory: (configService: ConfigService) => {

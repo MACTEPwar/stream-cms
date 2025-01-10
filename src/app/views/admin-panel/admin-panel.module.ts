@@ -14,6 +14,7 @@ import { RoomCardComponent } from './room-card/room-card.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { AdminPanelComponent } from './admin-panel.component';
 import { BreadcrumbService } from '@app-services';
+import { CreateRoomModalComponent } from '@partial-views';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BreadcrumbService } from '@app-services';
     MenuModule,
     ButtonModule,
     BreadcrumbModule,
+    CreateRoomModalComponent,
   ],
   providers: [BreadcrumbService],
 })

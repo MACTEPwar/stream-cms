@@ -200,17 +200,20 @@ export class AppComponent {
   }
 
   createRoom(): void {
-    const rand = new Date().getTime();
-    this.roomsService
-      .create$({
-        name: {
-          uk: `Кiмната ${rand}`,
-          ru: `Комната ${rand}`,
-        },
-      })
-      .subscribe((res) => {
-        this.router.navigate(['/admin-panel/rooms', res.id]);
-      });
+    // const rand = new Date().getTime();
+    // this.roomsService
+    //   .create$({
+    //     name: {
+    //       uk: `${rand}`,
+    //       ru: `${rand}`,
+    //     },
+    //     settings: {
+
+    //     }
+    //   })
+    //   .subscribe((res) => {
+    //     this.router.navigate(['/admin-panel/rooms', res.id]);
+    //   });
   }
 
   ngOnDestroy(): void {}

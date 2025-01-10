@@ -24,7 +24,7 @@ export class RoomsService {
     return this.data$;
   }
 
-  create$(model: { name: any }): Observable<any> {
+  create$(model: { name: any; settings: any }): Observable<any> {
     return this.roomsHttpService.create$(model).pipe(
       tap(() => {
         this.refreshData();
