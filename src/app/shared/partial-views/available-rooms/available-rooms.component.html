@@ -1,0 +1,7 @@
+<div class="container">
+  @for (room of availableRooms$ | async; track $index) {
+  <div>
+    <span>{{ room.name.uk }}</span>
+  </div>
+  }
+</div>

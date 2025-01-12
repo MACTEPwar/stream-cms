@@ -20,12 +20,24 @@ export class RoomsService {
     });
   }
 
-  getActiveRooms$(): Observable<any> {
-    return this.data$;
-  }
-
   create$(model: { name: any; settings: any }): Observable<any> {
     return this.roomsHttpService.create$(model).pipe(
+      tap(() => {
+        this.refreshData();
+      })
+    );
+  }
+
+  edit$(id: string, model: any): Observable<any> {
+    return this.roomsHttpService.edit$(id, model).pipe(
+      tap(() => {
+        this.refreshData();
+      })
+    );
+  }
+
+  delete$(id: string): Observable<any> {
+    return this.roomsHttpService.delete$(id).pipe(
       tap(() => {
         this.refreshData();
       })
@@ -38,5 +50,9 @@ export class RoomsService {
 
   clear$(roomId: string): Observable<any> {
     return this.roomsHttpService.clear$(roomId);
+  }
+
+  getAvailableRooms$(): Observable<any> {
+    return this.roomsHttpService.getAvailableRooms$();
   }
 }

@@ -132,14 +132,19 @@
               <ng-container *ngIf="curretnUser$ | async as currentUser">
                 <span>{{ currentUser.userInfo.name }}</span>
               </ng-container>
-              <div class="btn" *hasRole="'ADMIN'">
+              <!-- <div class="btn" *hasRole="'ADMIN'">
                 <app-button (onClick)="createRoom()">
                   <span>Создать комнату</span>
                 </app-button>
-              </div>
+              </div> -->
               <div class="btn">
                 <app-button (onClick)="goToPersonalArea()">
                   <span>КАБИНЕТ</span>
+                </app-button>
+              </div>
+              <div class="btn" *hasRole="'USER'">
+                <app-button (onClick)="showAvailableRooms()">
+                  <span>Доступные комнаты</span>
                 </app-button>
               </div>
               <div class="btn">

@@ -8,14 +8,18 @@ import {
 import { RoomsService } from '@app-services';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  DynamicDialogRef,
+  DynamicDialogModule,
+  DynamicDialogConfig,
+} from 'primeng/dynamicdialog';
 import { filter, of, switchMap, take } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-create-room-modal',
+  selector: 'app-edit-room-modal',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,10 +28,10 @@ import { ButtonModule } from 'primeng/button';
     InputNumberModule,
     ButtonModule,
   ],
-  templateUrl: './create-room-modal.component.html',
-  styleUrl: './create-room-modal.component.scss',
+  templateUrl: './edit-room-modal.component.html',
+  styleUrl: './edit-room-modal.component.scss',
 })
-export class CreateRoomModalComponent {
+export class EditRoomModalComponent {
   inviteModeOptions = [
     {
       label: 'Доки активна',
@@ -46,6 +50,7 @@ export class CreateRoomModalComponent {
   private random = new Date().getTime();
 
   profileForm = new FormGroup({
+    id: new FormControl(null, Validators.required),
     name: new FormGroup({
       uk: new FormControl(this.random, Validators.required),
       ru: new FormControl(this.random, Validators.required),
@@ -53,22 +58,30 @@ export class CreateRoomModalComponent {
     settings: new FormGroup({
       needRandomPlayers: new FormControl(2, Validators.required),
       inviteMode: new FormControl(0, Validators.required),
-      state: new FormControl('NEW'),
+      state: new FormControl(),
     }),
   });
 
   constructor(
     private roomsService: RoomsService,
     private messageService: MessageService,
-    private dynamicDialogRef: DynamicDialogRef
+    private dynamicDialogRef: DynamicDialogRef,
+    private dynamicDialogConfig: DynamicDialogConfig
   ) {}
 
-  create(): void {
+  ngOnInit(): void {
+    this.profileForm.patchValue(this.dynamicDialogConfig.data.room);
+  }
+
+  edit(): void {
     of(this.profileForm.valid)
       .pipe(
         filter((f) => f === true),
         switchMap((sw) =>
-          this.roomsService.create$(this.profileForm.getRawValue())
+          this.roomsService.edit$(
+            this.profileForm.get('id')?.value!,
+            this.profileForm.getRawValue()
+          )
         ),
         take(1)
       )

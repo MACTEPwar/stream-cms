@@ -15,6 +15,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { AdminPanelComponent } from './admin-panel.component';
 import { BreadcrumbService } from '@app-services';
 import { CreateRoomModalComponent } from '@partial-views';
+import { GetOptionsPipe } from 'src/app/views/admin-panel/rooms/get-options.pipe';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { CreateRoomModalComponent } from '@partial-views';
     ButtonModule,
     BreadcrumbModule,
     CreateRoomModalComponent,
+    GetOptionsPipe,
+    ProgressSpinnerModule,
   ],
   providers: [BreadcrumbService],
 })

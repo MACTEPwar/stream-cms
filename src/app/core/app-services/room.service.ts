@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, retry, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, retry, switchMap, tap } from 'rxjs';
 import { RoomsHttpService } from '../requests/rooms-http.service';
 import { UsersHttpService } from '../requests/users-http.service';
 
@@ -46,9 +46,9 @@ export class RoomService {
             include: {
               user: {
                 include: {
-                  userInfo: true
-                }
-              }
+                  userInfo: true,
+                },
+              },
             },
           },
         }
@@ -100,7 +100,18 @@ export class RoomService {
       .pipe(switchMap((sw) => this.loadUsers$()));
   }
 
-  choosePlayers$(options: any): Observable<any> {
-    return this.roomsHttpService.choosePlayers$(this.roomId, options);
+  choosePlayers$(): Observable<any> {
+    return this.roomsHttpService.choosePlayers$(this.roomId);
+  }
+
+  setNewLinkForThisRoom$(): Observable<any> {
+    return this.roomsHttpService.setNewLinkForThisRoom$(
+      this.room$.getValue().id
+    );
+  }
+
+  choosePlayers2$(): Observable<any> {
+    // setRoomLink()
+    return of(true);
   }
 }

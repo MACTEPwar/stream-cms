@@ -31,6 +31,10 @@ export class RoomsComponent {
       {
         label: 'Переглянути',
         icon: 'pi pi-eye',
+        command: (s) => {
+          alert(123);
+          // this.router.navigate(['admin-panel', 'rooms', id]);
+        },
       },
     ];
 

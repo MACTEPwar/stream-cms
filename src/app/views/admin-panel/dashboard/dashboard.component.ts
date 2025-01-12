@@ -27,7 +27,7 @@ export class DashboardComponent {
     private breadcrumbService: BreadcrumbService,
     public dialogService: DialogService
   ) {
-    this.rooms$ = this.roomsService.getActiveRooms$();
+    this.rooms$ = this.roomsService.data$;
 
     this.breadcrumbService.setItems(
       new BreadcrumbBuilder()

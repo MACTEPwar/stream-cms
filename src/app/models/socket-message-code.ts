@@ -32,6 +32,11 @@ export class SocketMesssageCode {
         SocketMesssageCode.appendCode('ChoosePlayersReady');
         return class extends BaseCode {};
       }
+      /** У комнаты новая ссылка */
+      public static get NewLinkForRoom() {
+        SocketMesssageCode.appendCode('NewLinkForRoom');
+        return class extends BaseCode {};
+      }
     };
   }
 }

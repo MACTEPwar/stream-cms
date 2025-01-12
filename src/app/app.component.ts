@@ -11,9 +11,11 @@ import {
 import { AuthService } from './core/app-services/auth.service';
 import { Nullable } from './models/t-nullable';
 import { Router } from '@angular/router';
-import { PlayerSocketService, RoomsService } from '@app-services';
+import { PlayerSocketService, RoomService, RoomsService } from '@app-services';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SocketMesssageCode } from '@models';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AvailableRoomsComponent } from '@partial-views';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +42,9 @@ export class AppComponent {
     private playerSocketService: PlayerSocketService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private roomsService: RoomsService
+    private roomsService: RoomsService,
+    private roomService: RoomService,
+    private dialogService: DialogService
   ) {
     this.isAuth$ = this.authService.isAuthenticated$();
     this.curretnUser$ = this.authService.currentUser$;
@@ -71,6 +75,16 @@ export class AppComponent {
       .onCommand(SocketMesssageCode.Room.InviteUsersToRoom.code)
       .subscribe((res) => {
         this.proccessCommandInveiteToRoom(res);
+      });
+
+    this.playerSocketService
+      .onCommand(SocketMesssageCode.Room.NewLinkForRoom.code)
+      .subscribe((res) => {
+        this.confirmationService.close();
+        // alert(JSON.stringify(res, null, 4));
+        if (this.roomService.roomId) {
+          this.roomService.choosePlayers$().subscribe();
+        }
       });
 
     this.authService.currentUser$
@@ -199,21 +213,28 @@ export class AppComponent {
     }
   }
 
-  createRoom(): void {
-    // const rand = new Date().getTime();
-    // this.roomsService
-    //   .create$({
-    //     name: {
-    //       uk: `${rand}`,
-    //       ru: `${rand}`,
-    //     },
-    //     settings: {
+  // createRoom(): void {
+  // const rand = new Date().getTime();
+  // this.roomsService
+  //   .create$({
+  //     name: {
+  //       uk: `${rand}`,
+  //       ru: `${rand}`,
+  //     },
+  //     settings: {
 
-    //     }
-    //   })
-    //   .subscribe((res) => {
-    //     this.router.navigate(['/admin-panel/rooms', res.id]);
-    //   });
+  //     }
+  //   })
+  //   .subscribe((res) => {
+  //     this.router.navigate(['/admin-panel/rooms', res.id]);
+  //   });
+  // }
+
+  showAvailableRooms(): void {
+    this.dialogService.open(AvailableRoomsComponent, {
+      width: '800px',
+      header: 'Доступнi кiмнати',
+    });
   }
 
   ngOnDestroy(): void {}

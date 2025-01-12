@@ -31,6 +31,18 @@ export class RoomsHttpService extends ABaseHttpService {
       .pipe(take(1));
   }
 
+  edit$(id: string, model: any): Observable<any> {
+    return this.httpClient
+      .patch<any>(`${this.getApiURL()}/rooms/${id}`, model)
+      .pipe(take(1));
+  }
+
+  delete$(id: string): Observable<any> {
+    return this.httpClient
+      .delete<any>(`${this.getApiURL()}/rooms/${id}`)
+      .pipe(take(1));
+  }
+
   inviteUserToRoom$(roomId: string): Observable<any> {
     return this.httpClient
       .post<any>(`${this.getApiURL()}/rooms/addUserToRoom`, {
@@ -45,9 +57,21 @@ export class RoomsHttpService extends ABaseHttpService {
       .pipe(take(1));
   }
 
-  choosePlayers$(roomId: string, options: any): Observable<any> {
+  choosePlayers$(roomId: string): Observable<any> {
     return this.httpClient
-      .post<any>(`${this.getApiURL()}/rooms/choosePlayers/${roomId}`, options)
+      .post<any>(`${this.getApiURL()}/rooms/choosePlayers/${roomId}`, {})
+      .pipe(take(1));
+  }
+
+  getAvailableRooms$(): Observable<any> {
+    return this.httpClient
+      .get<any>(`${this.getApiURL()}/rooms/availableRooms`)
+      .pipe(take(1));
+  }
+
+  setNewLinkForThisRoom$(roomID: string): Observable<any> {
+    return this.httpClient
+      .get<any>(`${this.getApiURL()}/rooms/getRoomLink/${roomID}`)
       .pipe(take(1));
   }
 }

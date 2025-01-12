@@ -16,6 +16,7 @@ import {
   PlayerSocketService,
   AdminService,
   RoomsService,
+  RoomService,
 } from '@app-services';
 import { AuthHttpService } from './core/requests/auth-http.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -64,6 +65,7 @@ import { ButtonModule } from 'primeng/button';
     ConfirmationService,
     MessageService,
     RoomsService,
+    RoomService,
     DialogService,
     {
       provide: APP_INITIALIZER,

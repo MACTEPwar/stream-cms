@@ -10,15 +10,17 @@ import {
   RoomsService,
 } from '@app-services';
 import { SocketMesssageCode } from '@models';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { RoomsHttpService } from 'src/app/core/requests/rooms-http.service';
+
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-room-card',
   templateUrl: './room-card.component.html',
   styleUrl: './room-card.component.scss',
-  providers: [RoomService],
+  providers: [],
 })
 export class RoomCardComponent {
   preloader = true;
@@ -37,7 +39,20 @@ export class RoomCardComponent {
     {
       label: 'Запустить рандомайзер',
       command: () => {
-        this.roomService.choosePlayers$({ playerCount: 2 }).subscribe();
+        const currentRoom = this.roomService.room$.getValue();
+
+        this.roomService.setNewLinkForThisRoom$().subscribe((res) => {
+          this.confirmationService.confirm({
+            header: 'ЖДУ ССЫЛКУ',
+            message:
+              'Окно закроется автоматически после обработки ссылки из бота.',
+            acceptVisible: false,
+            rejectLabel: 'Вiдмiнити',
+            reject: () => {
+              alert('Отменяю ввод ссылки');
+            },
+          });
+        });
       },
     },
     {
@@ -54,7 +69,8 @@ export class RoomCardComponent {
     private route: ActivatedRoute,
     private adminService: AdminService,
     private playerSocketService: PlayerSocketService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private confirmationService: ConfirmationService
   ) {
     this.room$ = this.roomService.room$;
     this.users$ = this.roomService.users$;
