@@ -37,6 +37,11 @@ export class SocketMesssageCode {
         SocketMesssageCode.appendCode('NewLinkForRoom');
         return class extends BaseCode {};
       }
+      /** При изменении статуса пользователя в комнате */
+      public static get ChangeUserState() {
+        SocketMesssageCode.appendCode('ChangePlayerState');
+        return class extends BaseCode {};
+      }
     };
   }
 }

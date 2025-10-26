@@ -9,7 +9,7 @@ const config: CapacitorConfig = {
     cleartext: true,
     androidScheme: 'http',
     // hostname: '192.168.0.107'
-    // url: '192.168.0.107:4200'
+    url: 'http://192.168.0.100:4200'
   },
 };
 

@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Личный кабинет</h1>
+  @let u = userInfo$ | async;
   <pre>
-        {{ userInfo$ | async | json }}
-    </pre
-  >
+        {{ u | json }}
+  </pre>
 </div>

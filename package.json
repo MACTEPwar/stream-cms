@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "npx firebase deploy"
+    "deploy": "npx firebase deploy",
+    "apk:install": "\"C:\\LDPlayer\\LDPlayer9\\adb.exe\" install -r ./android/app/build/outputs/apk/debug/app-debug.apk",
+    "apk:run": "start \"\" \"C:\\LDPlayer\\LDPlayer9\\ldplayer.exe\" && timeout 15 && npm run apk:install"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +26,7 @@
     "@capacitor/cli": "^6.1.2",
     "@capacitor/core": "^6.1.2",
     "@capacitor/filesystem": "^6.0.1",
+    "@jcesarmobile/ssl-skip": "0.4.0",
     "gapi-script": "^1.2.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",

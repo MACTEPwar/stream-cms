@@ -4,6 +4,8 @@ import {
   Observable,
   Subscription,
   filter,
+  iif,
+  of,
   switchMap,
   take,
   tap,
@@ -16,6 +18,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { SocketMesssageCode } from '@models';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AvailableRoomsComponent } from '@partial-views';
+import { ConfirmService } from '@core';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +44,7 @@ export class AppComponent {
     private router: Router,
     private playerSocketService: PlayerSocketService,
     private confirmationService: ConfirmationService,
+    private confirmService: ConfirmService,
     private messageService: MessageService,
     private roomsService: RoomsService,
     private roomService: RoomService,
@@ -57,6 +61,28 @@ export class AppComponent {
   ngOnInit(): void {
     this.setVh();
     this.authService.cheackAuth();
+
+    // this.confirmationService.confirm({
+    //   header: 'Повiдомлення',
+    //   message: 'Вас обрав рандомайзер. Чи будите ви грати?',
+    //   acceptLabel: 'Так',
+    //   rejectLabel: 'Нi',
+    //   accept: () => {},
+    //   reject: () => {},
+    // }).accept.subscribe(res => {
+    //   console.log('res', res)
+    // })
+
+    // this.confirmService
+    //   .confirm$({
+    //     header: 'Повiдомлення',
+    //     message: 'Вас обрав рандомайзер. Чи будите ви грати?',
+    //     acceptLabel: 'Так',
+    //     rejectLabel: 'Нi',
+    //   })
+    //   .subscribe((res) => {
+    //     console.log('res', res);
+    //   });
 
     // this.currentUserSubscription = this.authService.currentUser$.subscribe(
     //   (currentUser) => {
@@ -99,25 +125,62 @@ export class AppComponent {
           this.playerSocketService.onCommand(
             SocketMesssageCode.Room.ChoosePlayersReady.code
           )
-        )
+        ),
+        switchMap((sw: any) => {
+          if (
+            sw.randomUsers.includes(this.authService.currentUser$.getValue().id)
+          ) {
+            return this.confirmService
+              .confirm$({
+                header: 'Повiдомлення',
+                message: 'Вас обрав рандомайзер. Чи будите ви грати?',
+                acceptLabel: 'Так',
+                rejectLabel: 'Нi',
+              })
+              .pipe(
+                switchMap((sm2) => {
+                  console.log('test', sw);
+                  return sm2
+                    ? this.roomsService.changeUserStateInRoom$(
+                        sw.roomID,
+                        'CONFIRMED'
+                      )
+                    : this.roomsService.changeUserStateInRoom$(
+                        sw.roomID,
+                        'CANCELED'
+                      );
+                })
+              );
+          } else {
+            return this.confirmService.confirm$({
+              header: 'Повiдомлення',
+              message: 'Ви не потрапили до лоббi',
+              acceptLabel: 'Добре',
+              rejectVisible: false,
+            });
+          }
+        })
       )
       .subscribe((res) => {
-        // alert(123);
-        if (
-          res.randomUsers.includes(this.authService.currentUser$.getValue().id)
-        ) {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Инфо',
-            detail: 'Вас выбрал рандомайзер.',
-          });
-        } else {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'Инфо',
-            detail: 'Ты в пролете.',
-          });
-        }
+        console.log('test', res);
+        // if (
+        //   res.randomUsers.includes(this.authService.currentUser$.getValue().id)
+        // ) {
+        //   this.confirmationService.confirm({
+        //     header: 'Повiдомлення',
+        //     message: 'Вас обрав рандомайзер. Чи будите ви грати?',
+        //     acceptLabel: 'Так',
+        //     rejectLabel: 'Нi',
+        //     accept: () => {},
+        //     reject: () => {},
+        //   });
+        // } else {
+        // this.messageService.add({
+        //   severity: 'warn',
+        //   summary: 'Инфо',
+        //   detail: 'Ты в пролете.',
+        // });
+        // }
       });
   }
 

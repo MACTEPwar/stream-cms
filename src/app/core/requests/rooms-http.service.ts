@@ -74,4 +74,15 @@ export class RoomsHttpService extends ABaseHttpService {
       .get<any>(`${this.getApiURL()}/rooms/getRoomLink/${roomID}`)
       .pipe(take(1));
   }
+
+  changeUserStateInRoom$(
+    roomID: string,
+    state: 'IDLE' | 'SELECTED' | 'CONFIRMED' | 'CANCELED'
+  ): Observable<any> {
+    return this.httpClient
+      .put<any>(`${this.getApiURL()}/rooms/changeUserStateInRoom/${roomID}`, {
+        state,
+      })
+      .pipe(take(1));
+  }
 }

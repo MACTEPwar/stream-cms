@@ -55,4 +55,11 @@ export class RoomsService {
   getAvailableRooms$(): Observable<any> {
     return this.roomsHttpService.getAvailableRooms$();
   }
+
+  changeUserStateInRoom$(
+    roomId: string,
+    state: 'IDLE' | 'SELECTED' | 'CONFIRMED' | 'CANCELED'
+  ): Observable<any> {
+    return this.roomsHttpService.changeUserStateInRoom$(roomId, state);
+  }
 }

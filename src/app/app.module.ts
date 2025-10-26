@@ -8,7 +8,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SButtonModule } from './shared/components/s-button/s-button.module';
-import { ConfigService, QueryModule, RequestsModule } from '@core';
+import { ConfigService, ConfirmService, QueryModule, RequestsModule } from '@core';
 import {
   DonatersService,
   SheduleService,
@@ -63,6 +63,7 @@ import { ButtonModule } from 'primeng/button';
     SheduleService,
     DonatersService,
     ConfirmationService,
+    ConfirmService,
     MessageService,
     RoomsService,
     RoomService,
